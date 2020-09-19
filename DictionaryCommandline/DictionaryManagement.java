@@ -33,10 +33,10 @@ public class DictionaryManagement {
      * Show all words of the dictionary
      */
     public void showWords() {
-        System.out.println("No\t| English\t\t Vietnamese");
+        System.out.printf("%-10s |%-15s |%-15s \n", "No", "English", "Tiếng Việt");
         for (int i = 0; i < dictionarySize; i++) {
             Word w = this.myDictionary.getWordAt(i);
-            System.out.println(i + "\t " + w.getWord_target() + "\t\t " + w.getWord_explain());
+            System.out.printf("%-10s |%-15s |%-15s \n", i, w.getWord_target(), w.getWord_explain());
         }
     }
 
