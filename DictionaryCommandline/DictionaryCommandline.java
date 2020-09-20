@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DictionaryCommandline {
     private DictionaryManagement dictionaryManagement;
 
@@ -8,12 +10,12 @@ public class DictionaryCommandline {
         this.dictionaryManagement.showWords();
     }
 
-    public void dictionaryBasic() {
+    public void dictionaryBasic() throws IOException {
         this.dictionaryManagement.insertFromCommandline();
         showAllWords();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         DictionaryCommandline dict1 = new DictionaryCommandline();
         dict1.dictionaryBasic();
     }
