@@ -12,4 +12,3 @@ truck	xe tải
 plane	máy bay
 window	cửa sổ
 cottage	nhà tranh
-plane	may bay

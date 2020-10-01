@@ -155,7 +155,7 @@ public class DictionaryManagement {
         System.out.println("Enter the prefix (English) you want to find: ");
         String prefix = br.readLine();
 
-        ArrayList<Word> result = this.myDictionary.suggestWord(prefix);
+        ArrayList<Word> result = this.myDictionary.suggestWord(prefix, -1);
 
         System.out.println("Result found");
         System.out.printf("%-10s |%-15s |%-15s \n", "No", "English", "Tiếng Việt");

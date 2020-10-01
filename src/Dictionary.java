@@ -48,8 +48,15 @@ public class Dictionary {
         }
     }
 
-    public ArrayList<Word> suggestWord(String prefix) {
-        ArrayList<Integer> ids = this.englishTrie.suggest(prefix, this.words.size() - 1);
+    /**
+     * Suggest some word start with "prefix". Has limit.
+     * If limit = -1 then return all words.
+     */
+    public ArrayList<Word> suggestWord(String prefix, int limit) {
+        if (limit == -1) {
+            limit = this.words.size() - 1;
+        }
+        ArrayList<Integer> ids = this.englishTrie.suggest(prefix, Math.min(this.words.size() - 1, limit));
 
         ArrayList<Word> result = new ArrayList<Word>();
         for (int i = 0; i < ids.size(); i++) {
