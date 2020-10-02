@@ -1,4 +1,8 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class WordScrollPane {
@@ -7,6 +11,11 @@ public class WordScrollPane {
     private int width;
     private int height;
     private int visibleRowCount;
+    private JScrollPane scrollPane;
+
+    WordScrollPane() {
+        scrollPane = new JScrollPane();
+    }
 
     public void setPosition(int posX, int posY, int width, int height, int visibleRowCount) {
         this.posX = posX;
@@ -16,25 +25,49 @@ public class WordScrollPane {
         this.visibleRowCount = visibleRowCount;
     }
 
-    public JScrollPane createScrollPane(ArrayList<Word> suggestWords) {
+    void addMouseListener(DictionaryApplication app, JList<String> wordList) {
+        wordList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String word = wordList.getSelectedValue();
+                System.out.println(word);
+
+                app.createTextPane(app.searchWord(word).getWord_explain(), Color.magenta);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+//                System.out.println("Pressed\n");
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+//                System.out.println("Released\n");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+//                System.out.println("Entered\n");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+//                System.out.println("Exited\n");
+            }
+        });
+    }
+
+    public JScrollPane createScrollPane(DictionaryApplication app, ArrayList<Word> suggestWords) {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Word word : suggestWords) {
             listModel.addElement(word.getWord_target());
         }
 
-        listModel.addElement("TrungOre");
-        for (int i = 1; i <= 50; ++i) {
-            listModel.addElement("HelloWorld");
-            listModel.addElement("HelloWorld");
-            listModel.addElement("HelloWorld");
-            listModel.addElement("HelloWorld");
-            listModel.addElement("HelloWorld");
-        }
-
         JList<String> wordList = new JList<>(listModel);
         wordList.setVisibleRowCount(this.visibleRowCount);
+        addMouseListener(app, wordList);
 
-        JScrollPane scrollPane = new JScrollPane(wordList);
+        scrollPane = new JScrollPane(wordList);
         scrollPane.setBounds(this.posX, this.posY, this.width, this.height);
 
         return scrollPane;

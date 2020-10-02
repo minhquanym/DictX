@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -11,9 +13,11 @@ public class TextBox {
     private int width;
     private int height;
     private boolean activate;
+    private JTextField textBox;
 
     TextBox() {
         activate = false;
+        textBox = new JTextField();
     }
 
     public boolean isActivate() {
@@ -29,6 +33,7 @@ public class TextBox {
         this.posY = posY;
         this.width = width;
         this.height = height;
+        textBox.setBounds(this.posX, this.posY, this.width, this.height);
     }
 
     public void customizeTextField(JTextField textBox) {
@@ -57,7 +62,12 @@ public class TextBox {
                         System.out.println(text);
 
                         Word word = app.searchWord(text);
-                        System.out.println(word.getWord_explain());
+                        if (word == null) {
+                            app.createTextPane("No Word Found !!!", Color.RED);
+                        } else {
+                            System.out.println(word.getWord_explain());
+                            app.createTextPane(word.getWord_explain(), Color.RED);
+                        }
                     } catch (BadLocationException err) {
                         err.printStackTrace();
                     }
@@ -107,7 +117,7 @@ public class TextBox {
 
     public JTextField createTextBox(DictionaryApplication app) {
         // create
-        JTextField textBox = new RoundJTextField(50);
+        textBox = new RoundJTextField(50);
         textBox.setText("Search:");
 
         // custom textField
@@ -142,7 +152,6 @@ public class TextBox {
         // add MouseListener
         addMouseListener(textBox);
 
-        textBox.setBounds(this.posX, this.posY, this.width, this.height);
         return textBox;
     }
 }

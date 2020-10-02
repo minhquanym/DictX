@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -11,6 +15,27 @@ public class Dictionary {
     }
     public ArrayList<Word> getAllWords() {
         return this.words;
+    }
+
+    /**
+     * Import dictionary from file dictionaries.txt
+     * @throws IOException
+     */
+    public void importFromFile() throws IOException {
+        try {
+            FileReader fr = new FileReader("resources/dictionaries.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while (br.ready()) {
+                String[] words = br.readLine().split("\\t");
+                if (words.length == 2) {
+                    Word w = new Word(words[0], words[1]);
+                    this.addWord(w);
+                }
+            }
+            fr.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File dictionaries.txt does not exist in this folder");
+        }
     }
     public void addWord(Word w) {
         // Check if the word existed

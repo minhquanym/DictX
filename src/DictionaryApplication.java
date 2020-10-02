@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DictionaryApplication extends Dictionary {
@@ -8,11 +9,18 @@ public class DictionaryApplication extends Dictionary {
     private JFrame mainFrame;
     private JPanel controlPanel;
 
+    private TextPane textPane;
+    private TextBox textBox;
+    private WordScrollPane scrollPane;
+
     DictionaryApplication() {
         frame_width = 0;
         frame_height = 0;
         mainFrame = new JFrame("Dictionary");
         controlPanel = new JPanel();
+        textPane = new TextPane();
+        textBox = new TextBox();
+        scrollPane = new WordScrollPane();
     }
 
     public void AssignParameter() {
@@ -20,9 +28,17 @@ public class DictionaryApplication extends Dictionary {
         frame_height = 600;
     }
 
+    JTextPane createTextPane(String text, Color textColor) {
+        return textPane.createTextPane(text, textColor);
+    }
+
     public void runApplication() {
-        // my dictionary
-//        Dictionary myDictionary = new Dictionary();
+        /// load word
+        try {
+            this.importFromFile();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
 
         // assign parameter
         AssignParameter();
@@ -38,25 +54,24 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.setBounds(0, 0, frame_width, frame_height);
 
         // text box
-        TextBox textBox = new TextBox();
+        textBox = new TextBox();
         textBox.setPosition(10, 10, 100, 30);
-//        textBox.setPosition(10, 10, 100, 100);
         JTextField cc = textBox.createTextBox(this);
 //        mainFrame.add(textBox.createTextBox());
 //        controlPanel.add(textBox.createTextBox());
         controlPanel.add(cc);
 
         // scroll pane
-        WordScrollPane scrollPane = new WordScrollPane();
+        scrollPane = new WordScrollPane();
         scrollPane.setPosition(10, 50, 100, 300, 5);
 
-        ArrayList<Word> suggestWords = new ArrayList<>();// myDictionary.suggestWord("");
-        controlPanel.add(scrollPane.createScrollPane(suggestWords));
+        ArrayList<Word> suggestWords = this.suggestWord("", -1);
+        controlPanel.add(scrollPane.createScrollPane(this, suggestWords));
 
         // textPane
-        TextPane textPane = new TextPane();
-        textPane.setPostion(120, 50, 200, 200);
-        controlPanel.add(textPane.createTextPane());
+        textPane = new TextPane();
+        textPane.setPosition(120, 50, 200, 200);
+        controlPanel.add(textPane.createTextPane("Hello", Color.RED));
 
         // run
         mainFrame.add(controlPanel);

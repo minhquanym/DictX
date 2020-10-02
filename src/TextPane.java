@@ -10,12 +10,18 @@ public class TextPane {
     private int posY;
     private int width;
     private int height;
+    JTextPane textPane;
 
-    public void setPostion(int posX, int posY, int width, int height) {
+    TextPane() {
+        textPane = new JTextPane();
+    }
+
+    public void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        textPane.setBounds(this.posX, this.posY, this.width, this.height);
     }
 
     public void addColoredText(JTextPane pane, String text, Color color) {
@@ -31,13 +37,9 @@ public class TextPane {
         }
     }
 
-    public JTextPane createTextPane() {
-        JTextPane textPane = new JTextPane();
-
-        addColoredText(textPane, "MyText\n", Color.RED);
-        addColoredText(textPane, "HelloWorld", Color.BLUE);
-
-        textPane.setBounds(this.posX, this.posY, this.width, this.height);
+    public JTextPane createTextPane(String text, Color myColor) {
+        textPane.setText("");
+        addColoredText(textPane, text, myColor);
         return textPane;
     }
 }
