@@ -30,29 +30,23 @@ public class WordScrollPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String word = wordList.getSelectedValue();
-                System.out.println(word);
-
                 app.createTextPane(app.searchWord(word).getWord_explain(), Color.magenta);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-//                System.out.println("Pressed\n");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-//                System.out.println("Released\n");
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-//                System.out.println("Entered\n");
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-//                System.out.println("Exited\n");
             }
         });
     }
@@ -70,6 +64,10 @@ public class WordScrollPane {
         scrollPane = new JScrollPane(wordList);
         scrollPane.setBounds(this.posX, this.posY, this.width, this.height);
 
+        return scrollPane;
+    }
+
+    JScrollPane getCurrent() {
         return scrollPane;
     }
 }

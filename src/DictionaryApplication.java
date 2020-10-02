@@ -28,8 +28,37 @@ public class DictionaryApplication extends Dictionary {
         frame_height = 600;
     }
 
+    JTextField createTextBox() {
+        return textBox.createTextBox(this);
+    }
+
     JTextPane createTextPane(String text, Color textColor) {
         return textPane.createTextPane(text, textColor);
+    }
+
+    JScrollPane createScrollPane(ArrayList<Word> suggestWords) {
+        return scrollPane.createScrollPane(this, suggestWords);
+    }
+
+    public void removeScrollPane() {
+        controlPanel.remove(scrollPane.getCurrent());
+    }
+
+    public void removeTextBox(JTextField miniTextBox) {
+        controlPanel.remove(textBox.getCurrent());
+    }
+
+    public void removeTextPane() {
+        controlPanel.remove(textPane.getCurrent());
+    }
+
+    public void controlPanelRepaint() {
+        controlPanel.revalidate();
+        controlPanel.repaint();
+    }
+
+    public void addToPanel(Component comp) {
+        controlPanel.add(comp);
     }
 
     public void runApplication() {
@@ -56,17 +85,14 @@ public class DictionaryApplication extends Dictionary {
         // text box
         textBox = new TextBox();
         textBox.setPosition(10, 10, 100, 30);
-        JTextField cc = textBox.createTextBox(this);
-//        mainFrame.add(textBox.createTextBox());
-//        controlPanel.add(textBox.createTextBox());
-        controlPanel.add(cc);
+        controlPanel.add(createTextBox());
 
         // scroll pane
         scrollPane = new WordScrollPane();
         scrollPane.setPosition(10, 50, 100, 300, 5);
 
         ArrayList<Word> suggestWords = this.suggestWord("", -1);
-        controlPanel.add(scrollPane.createScrollPane(this, suggestWords));
+        controlPanel.add(createScrollPane(suggestWords));
 
         // textPane
         textPane = new TextPane();
@@ -83,9 +109,12 @@ public class DictionaryApplication extends Dictionary {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-//        controlPanel.remove(cc);
+//        removeScrollPane();
+//        controlPanel.add(createScrollPane(this.suggestWord("b", 1)));
 //        controlPanel.revalidate();
 //        controlPanel.repaint();
+//        mainFrame.add(controlPanel);
+//        mainFrame.setVisible(true);
 //        mainFrame.add(controlPanel);
 //
 //        try {
@@ -93,9 +122,9 @@ public class DictionaryApplication extends Dictionary {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-//        controlPanel.add(scrollPane.create(suggestWords));
-////        controlPanel.revalidate();
-////        controlPanel.repaint();
+//        controlPanel.add(scrollPane.createScrollPane(suggestWords));
+//        controlPanel.revalidate();
+//        controlPanel.repaint();
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,3 @@
-import org.w3c.dom.Text;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -36,7 +34,7 @@ public class TextBox {
         textBox.setBounds(this.posX, this.posY, this.width, this.height);
     }
 
-    public void customizeTextField(JTextField textBox) {
+    public void customizeTextField() {
         textBox.setSize(this.width, this.height);
 
         Font fileFont = new Font("Arial", Font.PLAIN, 10);
@@ -46,7 +44,7 @@ public class TextBox {
         textBox.setColumns(300);
     }
 
-    public void addKeyListener(DictionaryApplication app, JTextField textBox) {
+    public void addKeyListener(DictionaryApplication app) {
         // add key listener
         textBox.addKeyListener(new KeyListener() {
             @Override
@@ -56,6 +54,12 @@ public class TextBox {
 
             @Override
             public void keyPressed(KeyEvent e) {
+                if (!isActivate()) {
+                    textBox.setText("");
+                }
+                setActivate(true);
+                textBox.setForeground(Color.BLACK);
+
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     try {
                         String text = textBox.getDocument().getText(0, textBox.getDocument().getLength());
@@ -81,7 +85,7 @@ public class TextBox {
         });
     }
 
-    public void addMouseListener(JTextField textBox) {
+    public void addMouseListener() {
         textBox.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -115,43 +119,56 @@ public class TextBox {
         });
     }
 
-    public JTextField createTextBox(DictionaryApplication app) {
-        // create
-        textBox = new RoundJTextField(50);
-        textBox.setText("Search:");
-
-        // custom textField
-        customizeTextField(textBox);
-
-        // add DocumentListener
+    public void addDocumentListener(DictionaryApplication app) {
         textBox.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                System.out.print("Fuck this shit\n");
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
+            public void updateScrollPane(DocumentEvent e) {
                 try {
-                    String str = e.getDocument().getText(0, e.getDocument().getLength());
-                    System.out.println(str);
+                    String prefix = e.getDocument().getText(0, e.getDocument().getLength());
+                    app.removeScrollPane();
+                    app.addToPanel(app.createScrollPane(app.suggestWord(prefix, -1)));
+                    app.controlPanelRepaint();
                 } catch (BadLocationException err) {
                     err.printStackTrace();
                 }
             }
 
             @Override
-            public void insertUpdate(DocumentEvent e) {
+            public void changedUpdate(DocumentEvent e) {
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateScrollPane(e);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateScrollPane(e);
             }
         });
+    }
+
+    public JTextField createTextBox(DictionaryApplication app) {
+        // create
+        textBox = new RoundJTextField(50);
+        textBox.setText("Search:");
+
+        // custom textField
+        customizeTextField();
+
+        // add DocumentListener
+        addDocumentListener(app);
 
         // add KeyListener
-        addKeyListener(app, textBox);
+        addKeyListener(app);
 
         // add MouseListener
-        addMouseListener(textBox);
+        addMouseListener();
 
+        return textBox;
+    }
+
+    JTextField getCurrent() {
         return textBox;
     }
 }

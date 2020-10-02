@@ -4,6 +4,11 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 public class TextPane {
     private int posX;
@@ -21,7 +26,6 @@ public class TextPane {
         this.posY = posY;
         this.width = width;
         this.height = height;
-        textPane.setBounds(this.posX, this.posY, this.width, this.height);
     }
 
     public void addColoredText(JTextPane pane, String text, Color color) {
@@ -37,9 +41,34 @@ public class TextPane {
         }
     }
 
+    public void DisableEditing() {
+        // Dirty hack to disable editing
+        textPane.addFocusListener(new FocusListener() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                textPane.setEditable(true);
+            }
+            @Override
+            public void focusGained(FocusEvent e) {
+                textPane.setEditable(false);
+            }
+        });
+
+        textPane.setCaretColor(Color.WHITE);
+    }
+
     public JTextPane createTextPane(String text, Color myColor) {
+        textPane = new JTextPane();
+        textPane.setBounds(this.posX, this.posY, this.width, this.height);
+
+        DisableEditing();
+
         textPane.setText("");
         addColoredText(textPane, text, myColor);
+        return textPane;
+    }
+
+    JTextPane getCurrent() {
         return textPane;
     }
 }
