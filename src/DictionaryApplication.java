@@ -24,8 +24,8 @@ public class DictionaryApplication extends Dictionary {
     }
 
     public void AssignParameter() {
-        frame_width = 600;
-        frame_height = 600;
+        frame_width = 800;
+        frame_height = 700;
     }
 
     JTextField createTextBox() {
@@ -76,11 +76,18 @@ public class DictionaryApplication extends Dictionary {
         mainFrame.setSize(frame_width, frame_height);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
+        mainFrame.setResizable(false);
 
         /// main panel
         controlPanel.setLayout(null);
-        controlPanel.setBackground(Color.BLUE);
+        controlPanel.setBackground(Color.CYAN);
         controlPanel.setBounds(0, 0, frame_width, frame_height);
+
+        // background png
+//        BackgroundImage background = new BackgroundImage();
+//        background.setBounds(0, 0, frame_width, 100);
+//        background.load();
+//        controlPanel.add(background);
 
         // text box
         textBox = new TextBox();
@@ -97,7 +104,7 @@ public class DictionaryApplication extends Dictionary {
         // textPane
         textPane = new TextPane();
         textPane.setPosition(120, 50, 200, 200);
-        controlPanel.add(textPane.createTextPane("Hello", Color.RED));
+        controlPanel.add(textPane.createTextPane("", Color.RED));
 
         // run
         mainFrame.add(controlPanel);

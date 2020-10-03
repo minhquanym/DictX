@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class WordScrollPane {
@@ -30,7 +29,9 @@ public class WordScrollPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String word = wordList.getSelectedValue();
-                app.createTextPane(app.searchWord(word).getWord_explain(), Color.magenta);
+                app.removeTextPane();
+                app.addToPanel(app.createTextPane(app.searchWord(word).getWord_explain(), Color.magenta));
+                app.controlPanelRepaint();
             }
 
             @Override

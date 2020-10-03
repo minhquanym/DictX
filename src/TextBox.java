@@ -67,10 +67,15 @@ public class TextBox {
 
                         Word word = app.searchWord(text);
                         if (word == null) {
-                            app.createTextPane("No Word Found !!!", Color.RED);
+                            app.removeTextPane();
+                            app.addToPanel(app.createTextPane("No Word Found !!!", Color.RED));
+                            app.controlPanelRepaint();
                         } else {
-                            System.out.println(word.getWord_explain());
-                            app.createTextPane(word.getWord_explain(), Color.RED);
+//                            System.out.println(word.getWord_explain());
+//                            app.createTextPane(word.getWord_explain(), Color.RED);
+                            app.removeTextPane();
+                            app.addToPanel(app.createTextPane(word.getWord_explain(), Color.RED));
+                            app.controlPanelRepaint();
                         }
                     } catch (BadLocationException err) {
                         err.printStackTrace();
