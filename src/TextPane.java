@@ -83,18 +83,24 @@ public class TextPane {
         textPane.setCaretColor(Color.WHITE);
     }
 
+    JTextPane getCurrent() {
+        return textPane;
+    }
+
     public JTextPane createTextPane(String text, Color myColor) {
         textPane = new JTextPane();
         textPane.setBounds(this.posX, this.posY, this.width, this.height);
+        textPane.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         DisableEditing();
 
         textPane.setText("");
         addColoredText(textPane, text, myColor);
-        return textPane;
-    }
 
-    JTextPane getCurrent() {
+//        String cc = "";
+//        for (int i = 1; i <= 10000; ++i) cc = cc + "aaaa\n";
+//        addColoredText(textPane, cc, myColor);
+
         return textPane;
     }
 }

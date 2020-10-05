@@ -31,7 +31,6 @@ public class TextBox {
         this.posY = posY;
         this.width = width;
         this.height = height;
-        textBox.setBounds(this.posX, this.posY, this.width, this.height);
     }
 
     public void customizeTextField() {
@@ -67,14 +66,14 @@ public class TextBox {
 
                         Word word = app.searchWord(text);
                         if (word == null) {
-                            app.removeTextPane();
-                            app.addToPanel(app.createTextPane("No Word Found !!!", Color.RED));
+                            app.removeTextArea();
+                            app.addToPanel(app.createTextArea("No Word Found !!!", Color.RED));
                             app.controlPanelRepaint();
                         } else {
 //                            System.out.println(word.getWord_explain());
 //                            app.createTextPane(word.getWord_explain(), Color.RED);
-                            app.removeTextPane();
-                            app.addToPanel(app.createTextPane(word.getWord_explain(), Color.RED));
+                            app.removeTextArea();
+                            app.addToPanel(app.createTextArea(word.getWord_explain(), Color.RED));
                             app.controlPanelRepaint();
                         }
                     } catch (BadLocationException err) {
@@ -155,8 +154,12 @@ public class TextBox {
 
     public JTextField createTextBox(DictionaryApplication app) {
         // create
-        textBox = new RoundJTextField(50);
+//        textBox = new RoundJTextField(100);
+        textBox = new JTextField();
+        textBox.setBounds(this.posX, this.posY, this.width, this.height);
+        textBox.setFont(new Font("SansSerif", Font.PLAIN, 100));
         textBox.setText("Search:");
+//        textBox.setFont(new Font("serif", Font.PLAIN, 100));
 
         // custom textField
         customizeTextField();

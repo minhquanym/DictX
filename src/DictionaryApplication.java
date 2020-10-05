@@ -9,31 +9,41 @@ public class DictionaryApplication extends Dictionary {
     private JFrame mainFrame;
     private JPanel controlPanel;
 
-    private TextPane textPane;
     private TextBox textBox;
     private WordScrollPane scrollPane;
+    private TextArea textArea;
+
+    private SearchButton searchButton;
+    private EditButton editButton;
+    private DeleteButton deleteButton;
 
     DictionaryApplication() {
         frame_width = 0;
         frame_height = 0;
+
         mainFrame = new JFrame("Dictionary");
         controlPanel = new JPanel();
-        textPane = new TextPane();
+
         textBox = new TextBox();
         scrollPane = new WordScrollPane();
+        textArea = new TextArea();
+
+        searchButton = new SearchButton();
+        editButton = new EditButton();
+        deleteButton = new DeleteButton();
     }
 
     public void AssignParameter() {
-        frame_width = 800;
-        frame_height = 700;
+        frame_width = 700;
+        frame_height = 600;
     }
 
     JTextField createTextBox() {
         return textBox.createTextBox(this);
     }
 
-    JTextPane createTextPane(String text, Color textColor) {
-        return textPane.createTextPane(text, textColor);
+    JScrollPane createTextArea(String text, Color textColor) {
+        return textArea.createTextArea(text, textColor);
     }
 
     JScrollPane createScrollPane(ArrayList<Word> suggestWords) {
@@ -48,8 +58,8 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.remove(textBox.getCurrent());
     }
 
-    public void removeTextPane() {
-        controlPanel.remove(textPane.getCurrent());
+    public void removeTextArea() {
+        controlPanel.remove(textArea.getCurrent());
     }
 
     public void controlPanelRepaint() {
@@ -57,8 +67,54 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.repaint();
     }
 
+    public void controlPanelRemoveAll() {
+        controlPanel.removeAll();
+    }
+
     public void addToPanel(Component comp) {
         controlPanel.add(comp);
+    }
+
+    private void functionButtonGUI() {
+        // search button
+        searchButton = new SearchButton();
+        searchButton.setPosition(0, 0, 90, frame_height/3);
+        controlPanel.add(searchButton.createSearchButton(this));
+        // edit button
+        editButton = new EditButton();
+        editButton.setPosition(0, frame_height/3, 90, frame_height/3);
+        controlPanel.add(editButton.createEditButton(this));
+
+        // delete button
+        deleteButton = new DeleteButton();
+        deleteButton.setPosition(0, frame_height/3*2, 90, frame_height/3);
+        controlPanel.add(deleteButton.createDeleteButton(this));
+    }
+
+    public void searchGUI() {
+//        functionButtonGUI();
+
+        // background png
+        BackgroundImage background = new BackgroundImage();
+        background.setBounds(10, 0, frame_width, 160);
+        background.load();
+        controlPanel.add(background);
+
+        // text box
+        textBox = new TextBox();
+        textBox.setPosition(10, 170, 250, 50);
+        controlPanel.add(createTextBox());
+
+        // scroll pane
+        scrollPane = new WordScrollPane();
+        scrollPane.setPosition(10, 230, 250, frame_height - 10 - 220, 5);
+        ArrayList<Word> suggestWords = this.suggestWord("", -1);
+        controlPanel.add(createScrollPane(suggestWords));
+
+        // textArea
+        textArea = new TextArea();
+        textArea.setPosition(270, 170,  frame_width - 10 - 270, frame_height- 10 - 160);
+        controlPanel.add(textArea.createTextArea("Welcome to Oe? and Beo'u dictionary", Color.RED));
     }
 
     public void runApplication() {
@@ -73,65 +129,22 @@ public class DictionaryApplication extends Dictionary {
         AssignParameter();
 
         // create main frame
-        mainFrame.setSize(frame_width, frame_height);
+        mainFrame.setSize(frame_width, frame_height+40);
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
         mainFrame.setResizable(false);
 
-        /// main panel
+        // create main panel
         controlPanel.setLayout(null);
-        controlPanel.setBackground(Color.CYAN);
-        controlPanel.setBounds(0, 0, frame_width, frame_height);
+        controlPanel.setBackground(new Color(141, 202, 255));
+        controlPanel.setBounds(0, 0, frame_width, frame_height+40);
 
-        // background png
-//        BackgroundImage background = new BackgroundImage();
-//        background.setBounds(0, 0, frame_width, 100);
-//        background.load();
-//        controlPanel.add(background);
-
-        // text box
-        textBox = new TextBox();
-        textBox.setPosition(10, 10, 100, 30);
-        controlPanel.add(createTextBox());
-
-        // scroll pane
-        scrollPane = new WordScrollPane();
-        scrollPane.setPosition(10, 50, 100, 300, 5);
-
-        ArrayList<Word> suggestWords = this.suggestWord("", -1);
-        controlPanel.add(createScrollPane(suggestWords));
-
-        // textPane
-        textPane = new TextPane();
-        textPane.setPosition(120, 50, 200, 200);
-        controlPanel.add(textPane.createTextPane("", Color.RED));
+        // search GUI
+        searchGUI();
 
         // run
         mainFrame.add(controlPanel);
         mainFrame.setVisible(true);
-
-//        // test
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        removeScrollPane();
-//        controlPanel.add(createScrollPane(this.suggestWord("b", 1)));
-//        controlPanel.revalidate();
-//        controlPanel.repaint();
-//        mainFrame.add(controlPanel);
-//        mainFrame.setVisible(true);
-//        mainFrame.add(controlPanel);
-//
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        controlPanel.add(scrollPane.createScrollPane(suggestWords));
-//        controlPanel.revalidate();
-//        controlPanel.repaint();
     }
 
     public static void main(String[] args) {

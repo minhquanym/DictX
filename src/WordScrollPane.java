@@ -29,8 +29,8 @@ public class WordScrollPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String word = wordList.getSelectedValue();
-                app.removeTextPane();
-                app.addToPanel(app.createTextPane(app.searchWord(word).getWord_explain(), Color.magenta));
+                app.removeTextArea();
+                app.addToPanel(app.createTextArea(app.searchWord(word).getWord_explain(), Color.magenta));
                 app.controlPanelRepaint();
             }
 
@@ -58,12 +58,20 @@ public class WordScrollPane {
             listModel.addElement(word.getWord_target());
         }
 
+            for (int i = 1; i <= 60; ++i) {
+                listModel.addElement("Hello World");
+            }
+
         JList<String> wordList = new JList<>(listModel);
         wordList.setVisibleRowCount(this.visibleRowCount);
         addMouseListener(app, wordList);
 
+        wordList.setFont(new Font("SansSerif", Font.BOLD, 16));
+
         scrollPane = new JScrollPane(wordList);
         scrollPane.setBounds(this.posX, this.posY, this.width, this.height);
+
+        CustomizeScrollBar.custom(scrollPane);
 
         return scrollPane;
     }
