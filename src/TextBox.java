@@ -34,13 +34,11 @@ public class TextBox {
     }
 
     public void customizeTextField() {
-        textBox.setSize(this.width, this.height);
-
-        Font fileFont = new Font("Arial", Font.PLAIN, 10);
+        Font fileFont = new Font("Arial", Font.PLAIN, 20);
         textBox.setFont(fileFont);
         textBox.setBackground(Color.white);
         textBox.setForeground(Color.gray.brighter());
-        textBox.setColumns(300);
+//        textBox.setColumns(300);
     }
 
     public void addKeyListener(DictionaryApplication app) {
@@ -70,8 +68,6 @@ public class TextBox {
                             app.addToPanel(app.createTextArea("No Word Found !!!", Color.RED));
                             app.controlPanelRepaint();
                         } else {
-//                            System.out.println(word.getWord_explain());
-//                            app.createTextPane(word.getWord_explain(), Color.RED);
                             app.removeTextArea();
                             app.addToPanel(app.createTextArea(word.getWord_explain(), Color.RED));
                             app.controlPanelRepaint();
@@ -152,14 +148,17 @@ public class TextBox {
         });
     }
 
+    JTextField getCurrent() {
+        return textBox;
+    }
+
     public JTextField createTextBox(DictionaryApplication app) {
         // create
-//        textBox = new RoundJTextField(100);
-        textBox = new JTextField();
+        textBox = new RoundJTextField(100);
+//        textBox = new JTextField();
         textBox.setBounds(this.posX, this.posY, this.width, this.height);
-        textBox.setFont(new Font("SansSerif", Font.PLAIN, 100));
+//        textBox.setFont(new Font("SansSerif", Font.PLAIN, 100));
         textBox.setText("Search:");
-//        textBox.setFont(new Font("serif", Font.PLAIN, 100));
 
         // custom textField
         customizeTextField();
@@ -176,7 +175,22 @@ public class TextBox {
         return textBox;
     }
 
-    JTextField getCurrent() {
-        return textBox;
+    public static void main(String[] args) {
+        DictionaryApplication myDict = new DictionaryApplication();
+
+        TextBox textBox = new TextBox();
+        textBox.setPosition(20, 20, 80, 80);
+
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, 300, 300);
+        panel.add(textBox.createTextBox(myDict));
+
+        JFrame frame = new JFrame();
+        frame.setLayout(null);
+        frame.setSize(510, 510);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        frame.add(panel);
+        frame.setVisible(true);
     }
 }

@@ -82,7 +82,7 @@ public class TextArea {
 
     public JScrollPane createTextArea(String text, Color myColor) {
         textArea = new JTextArea();
-        textArea.setBounds(this.posX, this.posY, this.width, this.height);
+//        textArea.setBounds(this.posX, this.posY, this.width, this.height);
         textArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
         textArea.setLineWrap(true);
@@ -99,23 +99,6 @@ public class TextArea {
         CustomizeScrollBar.custom(scrollArea);
 
         return scrollArea;
-    }
-
-    public JTextArea JustArea(String text, Color myColor) {
-        textArea = new JTextArea();
-        textArea.setBounds(this.posX, this.posY, this.width, this.height);
-        textArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
-
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-
-        DisableEditing();
-
-        textArea.setText("");
-        textArea.append(text);
-
-        System.out.println(text);
-        return textArea;
     }
 
     public static void main(String[] args) {

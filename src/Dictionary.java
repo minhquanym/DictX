@@ -37,6 +37,9 @@ public class Dictionary {
             System.out.println("File dictionaries.txt does not exist in this folder");
         }
     }
+    public void loadFromFile() throws IOException {
+
+    }
     public void addWord(Word w) {
         // Check if the word existed
         int idSearched = englishTrie.search(w.getWord_target());
