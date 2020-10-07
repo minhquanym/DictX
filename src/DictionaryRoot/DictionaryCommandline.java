@@ -28,12 +28,12 @@ public class DictionaryCommandline {
         DictionaryCommandline dict1 = new DictionaryCommandline();
         dict1.dictionaryAdvanced();
         dict1.dictionarySearcher();
-        dict1.dictionaryManagement.editWord();
+//        dict1.dictionaryManagement.editWord();
 
         dict1.dictionaryManagement.addWord();
-        dict1.dictionaryManagement.deleteWord();
+//        dict1.dictionaryManagement.deleteWord();
 
-        dict1.dictionarySearcher();
+//        dict1.dictionarySearcher();
         dict1.dictionaryManagement.dictionaryExportToFile();
     }
 }

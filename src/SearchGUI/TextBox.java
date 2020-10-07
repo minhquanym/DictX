@@ -41,7 +41,6 @@ public class TextBox {
         textBox.setFont(fileFont);
         textBox.setBackground(Color.white);
         textBox.setForeground(Color.gray.brighter());
-//        textBox.setColumns(300);
     }
 
     public void addKeyListener(SearchGUI app) {

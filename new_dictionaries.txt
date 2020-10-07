@@ -1,3 +1,4 @@
+bird	chim
 pig	lợn
 chicken	gà
 dog	chó
@@ -6,9 +7,9 @@ rose	hoa hồng
 sunflower	hoa hướng dương
 water	nước
 ocean	biển cả
+bike	xe đạp
 truck	xe tải
 plane	máy bay
 window	cửa sổ
 cottage	nhà tranh
-bike	xe dapp
-book	cuốn sách
+plankton	sinh vật phù 

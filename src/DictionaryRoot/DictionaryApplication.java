@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import EditGUI.EditGUI;
 import SearchGUI.*;
 import SearchGUI.TextArea;
 
@@ -56,6 +58,13 @@ public class DictionaryApplication extends Dictionary {
     }
 
     public void runApplication() {
+        // load word
+        try {
+            this.importFromFile();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+
         // assign parameter
         AssignParameter();
 
@@ -70,9 +79,13 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.setBackground(new Color(141, 202, 255));
         controlPanel.setBounds(0, 0, frameWidth, frameHeight+40);
 
-        // search GUI
-        SearchGUI searchGUI = new SearchGUI(this);
-        searchGUI.execute();
+//        // search GUI
+//        SearchGUI searchGUI = new SearchGUI(this);
+//        searchGUI.execute();
+
+        // edit GUI
+        EditGUI editGUI = new EditGUI(this);
+        editGUI.execute();
 
         // run
         mainFrame.add(controlPanel);
