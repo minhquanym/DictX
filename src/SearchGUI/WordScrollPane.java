@@ -32,9 +32,14 @@ public class WordScrollPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String word = wordList.getSelectedValue();
+                String matchWord = app.searchWord(word).getWord_explain();
+
                 app.removeTextArea();
-                app.addToPanel(app.createTextArea(app.searchWord(word).getWord_explain(), Color.magenta));
+                app.addToPanel(app.createTextArea(matchWord, Color.magenta));
                 app.controlPanelRepaint();
+
+                app.setCurrentWordExplain(matchWord);
+                app.setCurrentWordTarget(word);
             }
 
             @Override

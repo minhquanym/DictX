@@ -11,6 +11,10 @@ import SearchGUI.TextArea;
 public class SearchGUI extends Dictionary {
     private int frameWidth;
     private int frameHeight;
+
+    private String currentWordTarget;
+    private String currentWordExplain;
+
     private JFrame mainFrame;
     private JPanel controlPanel;
 
@@ -18,9 +22,14 @@ public class SearchGUI extends Dictionary {
     private WordScrollPane scrollPane;
     private TextArea textArea;
 
+    private VoiceButton voiceButton;
+
     public SearchGUI(DictionaryApplication app) {
         frameWidth = app.getFrameWidth();
         frameHeight = app.getFrameHeight();
+
+        currentWordTarget = "Ore";
+        currentWordExplain = "BeosU";
 
         mainFrame = app.getMainFrame();
         controlPanel = app.getControlPanel();
@@ -28,6 +37,24 @@ public class SearchGUI extends Dictionary {
         textBox = new TextBox();
         scrollPane = new WordScrollPane();
         textArea = new TextArea();
+
+        voiceButton = new VoiceButton();
+    }
+
+    String getCurrentWordTarget() {
+        return currentWordTarget;
+    }
+
+    String getCurrentWordExplain() {
+        return currentWordExplain;
+    }
+
+    void setCurrentWordTarget(String text) {
+        currentWordTarget = text;
+    }
+
+    void setCurrentWordExplain(String text) {
+        currentWordExplain = text;
     }
 
     public JTextField createTextBox() {
@@ -74,6 +101,13 @@ public class SearchGUI extends Dictionary {
         } catch (IOException err) {
             err.printStackTrace();
         }
+
+        // voice button
+        voiceButton = new VoiceButton();
+        voiceButton.setPosition(frameWidth - 37, 140, 27, 27);
+        controlPanel.add(voiceButton.createVoiceButtonEn(this));
+        controlPanel.add(voiceButton.createVoiceButtonVi(this));
+        voiceButton.addMouseListener(this);
 
         // background png
         BackgroundImage background = new BackgroundImage();

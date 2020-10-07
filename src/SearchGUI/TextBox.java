@@ -66,11 +66,15 @@ public class TextBox {
                         System.out.println(text);
 
                         Word word = app.searchWord(text);
+                        app.setCurrentWordTarget(text);
+
                         if (word == null) {
+                            app.setCurrentWordExplain("Không tìm thấy kết qủa");
                             app.removeTextArea();
                             app.addToPanel(app.createTextArea("No DictionaryRoot.Word Found !!!", Color.RED));
                             app.controlPanelRepaint();
                         } else {
+                            app.setCurrentWordExplain(word.getWord_explain());
                             app.removeTextArea();
                             app.addToPanel(app.createTextArea(word.getWord_explain(), Color.RED));
                             app.controlPanelRepaint();
