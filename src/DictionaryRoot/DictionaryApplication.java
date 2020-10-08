@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import DeleteGUI.DeleteGUI;
 import EditGUI.EditGUI;
 import SearchGUI.*;
 import SearchGUI.TextArea;
@@ -79,13 +80,9 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.setBackground(new Color(141, 202, 255));
         controlPanel.setBounds(0, 0, frameWidth, frameHeight+40);
 
-//        // search GUI
-//        SearchGUI searchGUI = new SearchGUI(this);
-//        searchGUI.execute();
-
-        // edit GUI
-        EditGUI editGUI = new EditGUI(this);
-        editGUI.execute();
+        // search GUI
+        SearchGUI searchGUI = new SearchGUI(this);
+        searchGUI.execute();
 
         // run
         mainFrame.add(controlPanel);

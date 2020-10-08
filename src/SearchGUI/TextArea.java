@@ -1,6 +1,7 @@
 package SearchGUI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -85,6 +86,10 @@ public class TextArea {
 
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        textArea.setBorder(BorderFactory.createCompoundBorder(border,
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         DisableEditing();
 

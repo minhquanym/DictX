@@ -19,6 +19,7 @@ public class EditGUI extends Dictionary {
     private WordTextField wordExplainTextField;
 
     private EditButton editButton;
+    private HomePageLabel homePageLabel;
 
     public EditGUI(DictionaryApplication app) {
         this.mainFrame = app.getMainFrame();
@@ -72,5 +73,11 @@ public class EditGUI extends Dictionary {
         editButton = new EditButton();
         editButton.setPosition(560, 230, 100, 100);
         controlPanel.add(editButton.createEditButton(this));
+
+        // Home Page Label
+        homePageLabel = new HomePageLabel();
+        homePageLabel.setBounds(frameWidth/2-180, 420, 300, 130);
+        homePageLabel.load();
+        controlPanel.add(homePageLabel);
     }
 }

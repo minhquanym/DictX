@@ -1,6 +1,7 @@
 package SearchGUI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -41,6 +42,10 @@ public class TextBox {
         textBox.setFont(fileFont);
         textBox.setBackground(Color.white);
         textBox.setForeground(Color.gray.brighter());
+
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        textBox.setBorder(BorderFactory.createCompoundBorder(border,
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
     }
 
     public void addKeyListener(SearchGUI app) {
@@ -70,7 +75,7 @@ public class TextBox {
                         if (word == null) {
                             app.setCurrentWordExplain("Không tìm thấy kết qủa");
                             app.removeTextArea();
-                            app.addToPanel(app.createTextArea("No DictionaryRoot.Word Found !!!", Color.RED));
+                            app.addToPanel(app.createTextArea("No Word Found !!!", Color.RED));
                             app.controlPanelRepaint();
                         } else {
                             app.setCurrentWordExplain(word.getWord_explain());
@@ -159,6 +164,9 @@ public class TextBox {
     }
 
     public JTextField createTextBox(SearchGUI app) {
+        // set activate false
+        this.activate = false;
+
         // create
         textBox = new RoundJTextField(100);
         textBox.setBounds(this.posX, this.posY, this.width, this.height);

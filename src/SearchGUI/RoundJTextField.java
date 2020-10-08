@@ -26,14 +26,4 @@ public class RoundJTextField extends JTextField {
         }
         return shape.contains(x, y);
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Rounded corner text filed demo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
-        frame.setLayout(new FlowLayout());
-        JTextField field = new RoundJTextField(15);
-        frame.add(field);
-        frame.setVisible(true);
-    }
 }

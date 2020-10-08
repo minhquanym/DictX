@@ -1,9 +1,6 @@
 package DictionaryRoot;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -39,8 +36,20 @@ public class Dictionary {
             System.out.println("File dictionaries.txt does not exist in this folder");
         }
     }
-    public void loadFromFile() throws IOException {
+    public void saveNewDictionary() throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter("resources/dictionaries.txt"));
+        ArrayList<Word> allWords = this.getAllWords();
 
+        for (int i = 0; i < allWords.size(); i++) {
+            if (allWords.get(i) == null) {
+                continue; // skip word be deleted
+            }
+            String English = allWords.get(i).getWord_target();
+            String Vietnamese = allWords.get(i).getWord_explain();
+            bw.write(English + "\t" + Vietnamese);
+            bw.newLine();
+        }
+        bw.close();
     }
     public void addWord(Word w) {
         // Check if the word existed
@@ -49,14 +58,14 @@ public class Dictionary {
             words.add(w);
             englishTrie.add(w.getWord_target(), words.size() - 1);
         } else {
-            System.out.println("Sorry, DictionaryRoot.Word " + w.getWord_target() + " is existed.");
+            System.out.println("Sorry, Word " + w.getWord_target() + " is existed.");
         }
     }
 
     public void removeWord(Word w) {
         int idSearched = englishTrie.search(w.getWord_target());
         if (idSearched == -1) {
-            System.out.println("Cant delete. DictionaryRoot.Word not existed");
+            System.out.println("Cant delete. Word not existed");
         } else {
             words.set(idSearched, null);
             englishTrie.delete(w.getWord_target());
@@ -94,11 +103,12 @@ public class Dictionary {
         }
         return result;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Dictionary dict1 = new Dictionary();
+        dict1.importFromFile();
         Word bird = new Word("bird", "chim");
         dict1.addWord(bird);
         Word w = dict1.getWordAt(0);
-        System.out.println(w.getWord_target() + "\t\t " + w.getWord_explain());
+        dict1.saveNewDictionary();
     }
 }

@@ -23,6 +23,8 @@ public class SearchGUI extends Dictionary {
     private TextArea textArea;
 
     private VoiceButton voiceButton;
+    private DeleteButton deleteButton;
+    private EditButton editButton;
 
     public SearchGUI(DictionaryApplication app) {
         frameWidth = app.getFrameWidth();
@@ -39,6 +41,8 @@ public class SearchGUI extends Dictionary {
         textArea = new TextArea();
 
         voiceButton = new VoiceButton();
+        deleteButton = new DeleteButton();
+        editButton = new EditButton();
     }
 
     String getCurrentWordTarget() {
@@ -57,6 +61,10 @@ public class SearchGUI extends Dictionary {
         currentWordExplain = text;
     }
 
+    public JFrame getMainFrame() {
+        return mainFrame;
+    }
+
     public JTextField createTextBox() {
         return textBox.createTextBox(this);
     }
@@ -73,7 +81,7 @@ public class SearchGUI extends Dictionary {
         controlPanel.remove(scrollPane.getCurrent());
     }
 
-    public void removeTextBox(JTextField miniTextBox) {
+    public void removeTextBox() {
         controlPanel.remove(textBox.getCurrent());
     }
 
@@ -108,6 +116,16 @@ public class SearchGUI extends Dictionary {
         controlPanel.add(voiceButton.createVoiceButtonEn(this));
         controlPanel.add(voiceButton.createVoiceButtonVi(this));
         voiceButton.addMouseListener(this);
+
+        // delete button
+        deleteButton = new DeleteButton();
+        deleteButton.setPosition(frameWidth - 37 - 31 - 31, 140, 27, 27);
+        controlPanel.add(deleteButton.createDeleteButton(this));
+
+        // edit button
+        editButton = new EditButton();
+        editButton.setPosition(frameWidth - 37 - 31 - 31 - 31, 140, 27, 27);
+        controlPanel.add(editButton.createEditButton(this));
 
         // background png
         BackgroundImage background = new BackgroundImage();

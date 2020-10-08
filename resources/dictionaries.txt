@@ -1,4 +1,3 @@
-bird	chim
 pig	lợn
 chicken	gà
 dog	chó
@@ -12,3 +11,11 @@ truck	xe tải
 plane	máy bay
 window	cửa sổ
 cottage	nhà tranh
+gun	súng
+plankton	sinh vật phù du
+love	tình yêu
+shadow	bóng đêm
+god	thánh
+garbage	thùng rác
+legend	huyền thoại
+bird	con chim

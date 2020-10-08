@@ -2,10 +2,8 @@ package EditGUI;
 
 import DictionaryRoot.Word;
 import SearchGUI.RoundJTextField;
-import SearchGUI.SearchGUI;
 
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -138,7 +136,7 @@ public class WordTextField {
         });
     }
 
-    JTextField createWordTextField(EditGUI app, String nameTextField) {
+    public JTextField createWordTextField(EditGUI app, String nameTextField) {
         textField = new RoundJTextField(100);
         textField.setBounds(this.posX, this.posY, this.width, this.height);
         textField.setText(nameTextField);

@@ -1,6 +1,7 @@
 package SearchGUI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -60,14 +61,17 @@ public class WordScrollPane {
         });
     }
 
+    void addArrowKeyListener() {
+        JScrollBar vertical = scrollPane.getVerticalScrollBar();
+        InputMap im = vertical.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        im.put(KeyStroke.getKeyStroke("DOWN"), "positiveUnitIncrement");
+        im.put(KeyStroke.getKeyStroke("UP"), "negativeUnitIncrement");
+    }
+
     public JScrollPane createScrollPane(SearchGUI app, ArrayList<Word> suggestWords) {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Word word : suggestWords) {
             listModel.addElement(word.getWord_target());
-        }
-
-        for (int i = 1; i <= 60; ++i) {
-            listModel.addElement("Hello World");
         }
 
         JList<String> wordList = new JList<>(listModel);
@@ -79,7 +83,12 @@ public class WordScrollPane {
         scrollPane = new JScrollPane(wordList);
         scrollPane.setBounds(this.posX, this.posY, this.width, this.height);
 
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        scrollPane.setBorder(BorderFactory.createCompoundBorder(border,
+                BorderFactory.createEmptyBorder(4, 4, 4, 2)));
+
         CustomizeScrollBar.custom(scrollPane);
+        addArrowKeyListener();
 
         return scrollPane;
     }
