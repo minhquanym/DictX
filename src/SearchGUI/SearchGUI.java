@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import MainPageGUI.MainPageGUI;
 import SearchGUI.*;
 import SearchGUI.TextArea;
 
@@ -25,6 +27,9 @@ public class SearchGUI extends Dictionary {
     private VoiceButton voiceButton;
     private DeleteButton deleteButton;
     private EditButton editButton;
+    private ReturnButton returnButton;
+
+    private GoogleTranslator ggTranslator;
 
     public SearchGUI(DictionaryApplication app) {
         frameWidth = app.getFrameWidth();
@@ -43,6 +48,31 @@ public class SearchGUI extends Dictionary {
         voiceButton = new VoiceButton();
         deleteButton = new DeleteButton();
         editButton = new EditButton();
+        returnButton = new ReturnButton();
+
+        ggTranslator = new GoogleTranslator();
+    }
+
+    public SearchGUI(int frameWidth, int frameHeight, JFrame mainFrame, JPanel controlPanel) {
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
+
+        currentWordTarget = "Ore";
+        currentWordExplain = "BeosU";
+
+        this.mainFrame = mainFrame;
+        this.controlPanel = controlPanel;
+
+        textBox = new TextBox();
+        scrollPane = new WordScrollPane();
+        textArea = new TextArea();
+
+        voiceButton = new VoiceButton();
+        deleteButton = new DeleteButton();
+        editButton = new EditButton();
+        returnButton = new ReturnButton();
+
+        ggTranslator = new GoogleTranslator();
     }
 
     String getCurrentWordTarget() {
@@ -102,6 +132,40 @@ public class SearchGUI extends Dictionary {
         controlPanel.add(comp);
     }
 
+    public void textAreaPrint(String word, String matchWord) {
+        String ggMeaningVi = "";
+//        String ggMeaningEn = "";
+        try {
+            ggMeaningVi = ggTranslator.translateSingleWord("en", "vi", word);
+//            ggMeaningEn = ggTranslator.translateSingleWord("en", "en", word);
+//            ggMeaningEn = ggTranslator.translateSingleWord("en", "en", "champion");
+        } catch (Exception err) {
+            err.printStackTrace();
+            ggMeaningVi = "Không có kết nối internet !!!";
+//            ggMeaningEn = "Internet connection error !!!";
+        }
+
+        String text = "***** My Dictionary: \n" + matchWord
+                + "\n\n\n***** Google Translate(vi): \n" + ggMeaningVi;
+//                + "\n\n\n***** Google Translate(en): \n" + ggMeaningEn;
+
+        removeTextArea();
+        addToPanel(createTextArea(text, Color.magenta));
+        controlPanelRepaint();
+
+        setCurrentWordExplain(matchWord);
+        setCurrentWordTarget(word);
+    }
+
+    void executeMainPage() {
+        controlPanel.removeAll();
+        MainPageGUI mainPageGUI = new MainPageGUI(this.frameWidth, this.frameHeight, this.mainFrame, this.controlPanel);
+        mainPageGUI.execute();
+
+        controlPanel.repaint();
+        controlPanel.revalidate();
+    }
+
     public void execute() {
         // load word
         try {
@@ -126,6 +190,11 @@ public class SearchGUI extends Dictionary {
         editButton = new EditButton();
         editButton.setPosition(frameWidth - 37 - 31 - 31 - 31, 140, 27, 27);
         controlPanel.add(editButton.createEditButton(this));
+
+        // return button
+        returnButton = new ReturnButton();
+        returnButton.setPosition(frameWidth - 37 - 31 - 31 - 31 - 31, 140, 27, 27);
+        controlPanel.add(returnButton.createReturnButton(this));
 
         // background png
         BackgroundImage background = new BackgroundImage();

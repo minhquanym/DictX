@@ -73,15 +73,9 @@ public class TextBox {
                         app.setCurrentWordTarget(text);
 
                         if (word == null) {
-                            app.setCurrentWordExplain("Không tìm thấy kết qủa");
-                            app.removeTextArea();
-                            app.addToPanel(app.createTextArea("No Word Found !!!", Color.RED));
-                            app.controlPanelRepaint();
+                            app.textAreaPrint(text, "Không tìm thấy kết qủa");
                         } else {
-                            app.setCurrentWordExplain(word.getWord_explain());
-                            app.removeTextArea();
-                            app.addToPanel(app.createTextArea(word.getWord_explain(), Color.RED));
-                            app.controlPanelRepaint();
+                            app.textAreaPrint(text, word.getWord_explain());
                         }
                     } catch (BadLocationException err) {
                         err.printStackTrace();

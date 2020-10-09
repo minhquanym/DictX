@@ -38,14 +38,15 @@ public class GoogleTranslator {
         JSONArray obj2 = new JSONArray(obj.get(0).toString());
         JSONArray meaning = new JSONArray(obj2.get(0).toString());
 
-        ans += (String)("\t" + meaning.get(1) + "\t|\t" + meaning.get(0) + "\n");
+        ans += (String)(meaning.get(1) + "  |  " + meaning.get(0) + "\n");
         // different meaning
         JSONArray obj3 = new JSONArray(obj.get(1).toString());
         for (Object o : obj3) {
             JSONArray example = new JSONArray(o.toString());
-            ans += (String)("\t-\t" + example.get(0) + ":\n");
+//            ans += (String)("\t-\t" + example.get(0) + ":\n");
+            ans += (String)(example.get(0) + ":\n");
             JSONArray exampleWords = new JSONArray(example.get(1).toString());
-            ans += (String)("\t\t");
+//            ans += (String)("\t\t");
             for (Object o2 : exampleWords) {
                 ans += (String)(o2.toString() + ", ");
             }
@@ -81,9 +82,16 @@ public class GoogleTranslator {
         return (String) (obj_final.get(0));
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         GoogleTranslator A = new GoogleTranslator();
-        String result = A.translateParagraph("en", "vi", "Vietnam is champion");
-        System.out.println(result);
+
+        try {
+            String result = A.translateParagraph("en", "vi", "Vietnam is champion");
+            String cc = A.translateSingleWord("en", "vi", "champion");
+            System.out.println(result);
+            System.out.println(cc);
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
     }
 }

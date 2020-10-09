@@ -3,12 +3,8 @@ package DictionaryRoot;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import DeleteGUI.DeleteGUI;
-import EditGUI.EditGUI;
-import SearchGUI.*;
-import SearchGUI.TextArea;
+import MainPageGUI.MainPageGUI;
 
 public class DictionaryApplication extends Dictionary {
     private int frameWidth;
@@ -81,8 +77,16 @@ public class DictionaryApplication extends Dictionary {
         controlPanel.setBounds(0, 0, frameWidth, frameHeight+40);
 
         // search GUI
-        SearchGUI searchGUI = new SearchGUI(this);
-        searchGUI.execute();
+//        SearchGUI searchGUI = new SearchGUI(this);
+//        searchGUI.execute();
+
+        // paragraph translate GUI
+//        ParagraphTranslateGUI paragraphTranslateGUI = new ParagraphTranslateGUI(this);
+//        paragraphTranslateGUI.execute();
+
+        // main page GUI
+        MainPageGUI mainPageGUI = new MainPageGUI(this);
+        mainPageGUI.execute();
 
         // run
         mainFrame.add(controlPanel);

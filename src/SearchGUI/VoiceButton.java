@@ -113,6 +113,7 @@ public class VoiceButton {
         ImageIcon enIcon = new ImageIcon("resources/VoiceButtonEn.png");
         enButton = new JButton(resizeIcon(enIcon, this.width, this.height));
         enButton.setBounds(this.posX - 31, this.posY, this.width, this.height);
+        enButton.setToolTipText("english voice");
         return enButton;
     }
 
@@ -120,6 +121,7 @@ public class VoiceButton {
         ImageIcon viIcon = new ImageIcon("resources/VoiceButtonVi.png");
         viButton = new JButton(resizeIcon(viIcon, this.width, this.height));
         viButton.setBounds(this.posX, this.posY, this.width, this.height);
+        viButton.setToolTipText("vietnamese voice");
         return viButton;
     }
 }

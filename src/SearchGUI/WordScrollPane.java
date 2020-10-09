@@ -34,13 +34,7 @@ public class WordScrollPane {
             public void mouseClicked(MouseEvent e) {
                 String word = wordList.getSelectedValue();
                 String matchWord = app.searchWord(word).getWord_explain();
-
-                app.removeTextArea();
-                app.addToPanel(app.createTextArea(matchWord, Color.magenta));
-                app.controlPanelRepaint();
-
-                app.setCurrentWordExplain(matchWord);
-                app.setCurrentWordTarget(word);
+                app.textAreaPrint(word, matchWord);
             }
 
             @Override
@@ -87,7 +81,7 @@ public class WordScrollPane {
         scrollPane.setBorder(BorderFactory.createCompoundBorder(border,
                 BorderFactory.createEmptyBorder(4, 4, 4, 2)));
 
-        CustomizeScrollBar.custom(scrollPane);
+        //CustomizeScrollBar.custom(scrollPane);
         addArrowKeyListener();
 
         return scrollPane;

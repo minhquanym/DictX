@@ -71,6 +71,8 @@ public class EditButton {
         editButton = new JButton(resizeIcon(enIcon, this.width, this.height));
         editButton.setBounds(this.posX, this.posY, this.width, this.height);
 
+        editButton.setToolTipText("edit word in dictionary");
+
         addMouseListener(app);
 
         return editButton;

@@ -5,7 +5,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 
 public class CustomizeScrollBar {
-    static void custom(JScrollPane scrollPane) {
+    public static void custom(JScrollPane scrollPane) {
         scrollPane.setComponentZOrder(scrollPane.getVerticalScrollBar(), 0);
         scrollPane.setComponentZOrder(scrollPane.getViewport(), 1);
         scrollPane.getVerticalScrollBar().setOpaque(false);

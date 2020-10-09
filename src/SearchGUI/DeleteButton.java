@@ -1,8 +1,5 @@
 package SearchGUI;
 
-import DeleteGUI.DeleteGUI;
-import DictionaryRoot.Dictionary;
-import DictionaryRoot.DictionaryApplication;
 import DictionaryRoot.Word;
 
 import javax.swing.*;
@@ -105,6 +102,8 @@ public class DeleteButton {
         ImageIcon enIcon = new ImageIcon("resources/DeleteButton.png");
         delButton = new JButton(resizeIcon(enIcon, this.width, this.height));
         delButton.setBounds(this.posX, this.posY, this.width, this.height);
+
+        delButton.setToolTipText("delete words in dictionary");
 
         addMouseListener(app);
 
