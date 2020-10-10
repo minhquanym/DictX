@@ -134,20 +134,15 @@ public class SearchGUI extends Dictionary {
 
     public void textAreaPrint(String word, String matchWord) {
         String ggMeaningVi = "";
-//        String ggMeaningEn = "";
         try {
             ggMeaningVi = ggTranslator.translateSingleWord("en", "vi", word);
-//            ggMeaningEn = ggTranslator.translateSingleWord("en", "en", word);
-//            ggMeaningEn = ggTranslator.translateSingleWord("en", "en", "champion");
         } catch (Exception err) {
             err.printStackTrace();
             ggMeaningVi = "Không có kết nối internet !!!";
-//            ggMeaningEn = "Internet connection error !!!";
         }
 
         String text = "***** My Dictionary: \n" + matchWord
                 + "\n\n\n***** Google Translate(vi): \n" + ggMeaningVi;
-//                + "\n\n\n***** Google Translate(en): \n" + ggMeaningEn;
 
         removeTextArea();
         addToPanel(createTextArea(text, Color.magenta));
