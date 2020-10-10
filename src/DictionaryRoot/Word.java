@@ -17,6 +17,16 @@ public class Word {
         return this.word_target;
     }
     public String getWord_explain() {
+        String returnText = word_explain;
+        returnText = returnText.replace("#", "");
+        returnText = returnText.replace("*", "\n*");
+        returnText = returnText.replace("|-", "\n  -");
+        returnText = returnText.replace("|=", "\n     » ");
+        returnText = returnText.replace("|+", "\n       ");
+        return returnText;
+    }
+
+    public String getPlain_explain() {
         return this.word_explain;
     }
 }

@@ -26,15 +26,7 @@ public class Dictionary {
             BufferedReader br = new BufferedReader(fr);
             while (br.ready()) {
                 String[] words = br.readLine().split("\\t");
-                String targetWord = words[0];
-                String explain = words[1];
-
-                explain = explain.replace("#", "\n");
-                explain = explain.replace("|-", "\n -");
-                explain = explain.replace("|+", "\n    ");
-                explain = explain.replace("|=", "\n  » ");
-
-                this.addWord(new Word(targetWord, explain));
+                this.addWord(new Word(words[0], words[1]));
             }
             fr.close();
         } catch (FileNotFoundException e) {
@@ -50,7 +42,7 @@ public class Dictionary {
                 continue; // skip word be deleted
             }
             String English = allWords.get(i).getWord_target();
-            String Vietnamese = allWords.get(i).getWord_explain();
+            String Vietnamese = allWords.get(i).getPlain_explain();
             bw.write(English + "\t" + Vietnamese);
             bw.newLine();
         }
@@ -109,6 +101,8 @@ public class Dictionary {
         return result;
     }
     public static void main(String[] args) throws IOException {
-
+        Dictionary dict = new Dictionary();
+        dict.importFromFile();
+        dict.saveNewDictionary();
     }
 }
