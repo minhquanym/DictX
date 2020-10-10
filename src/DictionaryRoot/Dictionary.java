@@ -26,10 +26,15 @@ public class Dictionary {
             BufferedReader br = new BufferedReader(fr);
             while (br.ready()) {
                 String[] words = br.readLine().split("\\t");
-                if (words.length == 2) {
-                    Word w = new Word(words[0], words[1]);
-                    this.addWord(w);
-                }
+                String targetWord = words[0];
+                String explain = words[1];
+
+                explain = explain.replace("#", "\n");
+                explain = explain.replace("|-", "\n -");
+                explain = explain.replace("|+", "\n    ");
+                explain = explain.replace("|=", "\n  » ");
+
+                this.addWord(new Word(targetWord, explain));
             }
             fr.close();
         } catch (FileNotFoundException e) {
@@ -104,11 +109,6 @@ public class Dictionary {
         return result;
     }
     public static void main(String[] args) throws IOException {
-        Dictionary dict1 = new Dictionary();
-        dict1.importFromFile();
-        Word bird = new Word("bird", "chim");
-        dict1.addWord(bird);
-        Word w = dict1.getWordAt(0);
-        dict1.saveNewDictionary();
+
     }
 }

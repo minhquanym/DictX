@@ -38,12 +38,12 @@ public class GoogleTranslator {
         JSONArray obj2 = new JSONArray(obj.get(0).toString());
         JSONArray meaning = new JSONArray(obj2.get(0).toString());
 
-        ans += (String)("\n" + meaning.get(1) + "\t|\t" + meaning.get(0) + "\n");
+        ans += (String)("\n" + meaning.get(1) + "   |   " + meaning.get(0) + "\n");
         // different meaning
         JSONArray obj3 = new JSONArray(obj.get(1).toString());
         for (Object o : obj3) {
             JSONArray example = new JSONArray(o.toString());
-            ans += (String)("\n- " + example.get(0) + ":  ");
+            ans += (String)("\n-  " + example.get(0) + ":  ");
             JSONArray exampleWords = new JSONArray(example.get(1).toString());
             for (Object o2 : exampleWords) {
                 ans += (String)(o2.toString() + ", ");
