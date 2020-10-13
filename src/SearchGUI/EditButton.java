@@ -15,6 +15,9 @@ public class EditButton {
 
     private JButton editButton;
 
+    /**
+     * constructor no param for edit button.
+     */
     public EditButton() {
         this.posX = 0;
         this.posY = 0;
@@ -23,6 +26,13 @@ public class EditButton {
         editButton = new JButton();
     }
 
+    /**
+     * set position for edit button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button 's width.
+     * @param height button 's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -30,12 +40,23 @@ public class EditButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight git height.
+     * @return fit icon.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener for button.
+     * @param app search gui.
+     */
     void addMouseListener(SearchGUI app) {
         editButton.addMouseListener(new MouseListener() {
             @Override
@@ -66,6 +87,11 @@ public class EditButton {
         });
     }
 
+    /**
+     * create edit button.
+     * @param app search gui.
+     * @return edit button.
+     */
     JButton createEditButton(SearchGUI app) {
         ImageIcon enIcon = new ImageIcon("resources/EditButton.png");
         editButton = new JButton(resizeIcon(enIcon, this.width, this.height));

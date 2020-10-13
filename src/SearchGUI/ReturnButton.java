@@ -13,6 +13,9 @@ public class ReturnButton {
 
     private JButton returnButton;
 
+    /**
+     * constructor no param for return button.
+     */
     public ReturnButton() {
         this.posX = 0;
         this.posY = 0;
@@ -21,6 +24,13 @@ public class ReturnButton {
         returnButton = new JButton();
     }
 
+    /**
+     * set position for return button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button 's width.
+     * @param height button 's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -28,12 +38,23 @@ public class ReturnButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit icon.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener to button.
+     * @param app
+     */
     void addMouseListener(SearchGUI app) {
         returnButton.addMouseListener(new MouseListener() {
             @Override
@@ -63,6 +84,11 @@ public class ReturnButton {
         });
     }
 
+    /**
+     * create return button.
+     * @param app search gui.
+     * @return return button.
+     */
     JButton createReturnButton(SearchGUI app) {
         ImageIcon enIcon = new ImageIcon("resources/ReturnButton.png");
         returnButton = new JButton(resizeIcon(enIcon, this.width, this.height));

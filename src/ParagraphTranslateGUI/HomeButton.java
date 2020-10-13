@@ -13,6 +13,9 @@ public class HomeButton {
 
     private JButton homeButton;
 
+    /**
+     * constructor for home button.
+     */
     public HomeButton() {
         this.posX = 0;
         this.posY = 0;
@@ -21,6 +24,13 @@ public class HomeButton {
         homeButton = new JButton();
     }
 
+    /**
+     * set position for home button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button 's width.
+     * @param height button 's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -28,12 +38,23 @@ public class HomeButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button/
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit button.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener to button.
+     * @param app Paragraph translate gui.
+     */
     void addMouseListener(ParagraphTranslateGUI app) {
         homeButton.addMouseListener(new MouseListener() {
             @Override
@@ -63,6 +84,11 @@ public class HomeButton {
         });
     }
 
+    /**
+     * create home button.
+     * @param app paragraph translate gui.
+     * @return home button.
+     */
     JButton createHomeButton(ParagraphTranslateGUI app) {
         ImageIcon enIcon = new ImageIcon("resources/HomeButton.png");
         homeButton = new JButton(resizeIcon(enIcon, this.width, this.height));

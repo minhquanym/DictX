@@ -23,6 +23,10 @@ public class ParagraphTranslateGUI {
 
     private GoogleTranslator ggTranslator;
 
+    /**
+     * constructor for paragraph translate gui.
+     * @param app my dictionary application.
+     */
     public ParagraphTranslateGUI(DictionaryApplication app) {
         frameWidth = app.getFrameWidth();
         frameHeight = app.getFrameHeight();
@@ -37,6 +41,13 @@ public class ParagraphTranslateGUI {
         ggTranslator = new GoogleTranslator();
     }
 
+    /**
+     * constructor for paragraph translate gui.
+     * @param frameWidth frame 's width.
+     * @param frameHeight frame 's height.
+     * @param mainFrame main frame.
+     * @param controlPanel control panel.
+     */
     public ParagraphTranslateGUI(int frameWidth, int frameHeight, JFrame mainFrame, JPanel controlPanel) {
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
@@ -51,10 +62,19 @@ public class ParagraphTranslateGUI {
         ggTranslator = new GoogleTranslator();
     }
 
+    /**
+     * get text which want to translate.
+     * @return target text.
+     */
     public String getTargetText() {
         return targetArea.getText();
     }
 
+    /**
+     * get google translate result.
+     * @param text text want to translate.
+     * @return translated text.
+     */
     public String getGGTranslate(String text) {
         String result = "";
         boolean internetConnection = true;
@@ -87,11 +107,18 @@ public class ParagraphTranslateGUI {
         return result;
     }
 
+    /**
+     * setter for explain area text.
+     * @param text text in explain area.
+     */
     public void setExplainAreaText(String text) {
         explainArea.setForeground(Color.BLACK);
         explainArea.setText(text);
     }
 
+    /**
+     * execute main page gui.
+     */
     void executeMainPage() {
         controlPanel.removeAll();
         MainPageGUI mainPageGUI = new MainPageGUI(this.frameWidth, this.frameHeight, this.mainFrame, this.controlPanel);
@@ -101,6 +128,9 @@ public class ParagraphTranslateGUI {
         controlPanel.revalidate();
     }
 
+    /**
+     * execute paragraph translate gui.
+     */
     public void execute() {
         // translate button
         translateButton = new TranslateButton();
@@ -125,7 +155,7 @@ public class ParagraphTranslateGUI {
         targetArea.addMouseListener();
         targetArea.addKeyListener();
 
-        // exlain area
+        // explain area
         explainArea = new TextArea();
         explainArea.setPosition(50, 350,  frameWidth - 10 - 100, 120);
         controlPanel.add(explainArea.createTextArea("Đoạn Văn Tiếng Việt", Color.RED));

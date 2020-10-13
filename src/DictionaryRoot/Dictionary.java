@@ -1,24 +1,31 @@
 package DictionaryRoot;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Dictionary {
     private ArrayList<Word> words;
     private Trie englishTrie;
 
+    /**
+     * construction no param for dictionary.
+     */
     public Dictionary() {
         words = new ArrayList<Word>();
         englishTrie = new Trie();
     }
+
+    /**
+     * getter to get all words in dictionary.
+     * @return list of words.
+     */
     public ArrayList<Word> getAllWords() {
         return this.words;
     }
 
     /**
-     * Import dictionary from file dictionaries.txt
-     * @throws IOException
+     * Import dictionary from file "dictionaries.txt".
+     * @throws IOException no file "dictionary.txt".
      */
     public void importFromFile() throws IOException {
         try {
@@ -33,6 +40,11 @@ public class Dictionary {
             System.out.println("File dictionaries.txt does not exist in this folder");
         }
     }
+
+    /**
+     * function to save new dictionary.
+     * @throws IOException no file "dictionaries.txt".
+     */
     public void saveNewDictionary() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("resources/dictionaries.txt"));
         ArrayList<Word> allWords = this.getAllWords();
@@ -48,6 +60,11 @@ public class Dictionary {
         }
         bw.close();
     }
+
+    /**
+     * add new word to dictionary.
+     * @param w new word.
+     */
     public void addWord(Word w) {
         // Check if the word existed
         int idSearched = englishTrie.search(w.getWord_target());
@@ -59,6 +76,10 @@ public class Dictionary {
         }
     }
 
+    /**
+     * remove word from dictionary.
+     * @param w word which want to remove.
+     */
     public void removeWord(Word w) {
         int idSearched = englishTrie.search(w.getWord_target());
         if (idSearched == -1) {
@@ -68,13 +89,29 @@ public class Dictionary {
             englishTrie.delete(w.getWord_target());
         }
     }
+
+    /**
+     * get word at id pos.
+     * @param pos position of word.
+     * @return word at position pos.
+     */
     public Word getWordAt(int pos) {
         return words.get(pos);
     }
+
+    /**
+     * get size of list word in dictionary.
+     * @return size of list word in dictionary.
+     */
     public int getSize() {
         return words.size();
     }
 
+    /**
+     * search for word in dictionary.
+     * @param w string target which want to search.
+     * @return word match with string w.
+     */
     public Word searchWord(String w) {
         int idSearched = englishTrie.search(w);
         if (idSearched == -1) {
@@ -100,6 +137,10 @@ public class Dictionary {
         }
         return result;
     }
+
+    /**
+     * main function to test dictionary.
+     */
     public static void main(String[] args) throws IOException {
         Dictionary dict = new Dictionary();
         dict.importFromFile();

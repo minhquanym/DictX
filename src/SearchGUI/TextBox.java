@@ -17,19 +17,37 @@ public class TextBox {
     private boolean activate;
     private JTextField textBox;
 
+    /**
+     * constructor no param for text box.
+     */
     public TextBox() {
         activate = false;
         textBox = new JTextField();
     }
 
+    /**
+     * getter for activate variable.
+     * @return activate.
+     */
     public boolean isActivate() {
         return activate;
     }
 
+    /**
+     * setter for activate variable.
+     * @param boolValue activate get value of boolValue.
+     */
     public void setActivate(boolean boolValue) {
         activate = boolValue;
     }
 
+    /**
+     * set position for text box.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width text box 's width.
+     * @param height text box 's height.
+     */
     public void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -37,6 +55,9 @@ public class TextBox {
         this.height = height;
     }
 
+    /**
+     * customize text box.
+     */
     public void customizeTextField() {
         Font fileFont = new Font("Arial", Font.PLAIN, 20);
         textBox.setFont(fileFont);
@@ -48,6 +69,10 @@ public class TextBox {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
     }
 
+    /**
+     * add key listener for text box.
+     * @param app search gui.
+     */
     public void addKeyListener(SearchGUI app) {
         // add key listener
         textBox.addKeyListener(new KeyListener() {
@@ -90,6 +115,9 @@ public class TextBox {
         });
     }
 
+    /**
+     * add mouse listener for text box.
+     */
     public void addMouseListener() {
         textBox.addMouseListener(new MouseListener() {
             @Override
@@ -124,6 +152,10 @@ public class TextBox {
         });
     }
 
+    /**
+     * add document listener for text box.
+     * @param app search gui.
+     */
     public void addDocumentListener(SearchGUI app) {
         textBox.getDocument().addDocumentListener(new DocumentListener() {
             public void updateScrollPane(DocumentEvent e) {
@@ -153,10 +185,19 @@ public class TextBox {
         });
     }
 
+    /**
+     * getter for current text box.
+     * @return current text box.
+     */
     public JTextField getCurrent() {
         return textBox;
     }
 
+    /**
+     * create text box.
+     * @param app search gui.
+     * @return text box.
+     */
     public JTextField createTextBox(SearchGUI app) {
         // set activate false
         this.activate = false;
@@ -181,6 +222,10 @@ public class TextBox {
         return textBox;
     }
 
+    /**
+     * main function to test text box.
+     * @param args arguments.
+     */
     public static void main(String[] args) {
         SearchGUI myDict = new SearchGUI(new DictionaryApplication());
 

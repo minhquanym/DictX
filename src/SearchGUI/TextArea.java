@@ -16,11 +16,21 @@ public class TextArea {
     private JTextArea textArea;
     private JScrollPane scrollArea;
 
+    /**
+     * constructor no param for text area.
+     */
     public TextArea() {
         textArea = new JTextArea();
         scrollArea = new JScrollPane();
     }
 
+    /**
+     * set position for text area.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width text area 's width.
+     * @param height text area 's height.
+     */
     public void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -28,6 +38,9 @@ public class TextArea {
         this.height = height;
     }
 
+    /**
+     * disable editing by some hack.
+     */
     public void DisableEditing() {
         // Dirty hack to disable editing
         textArea.addFocusListener(new FocusListener() {
@@ -71,14 +84,28 @@ public class TextArea {
         textArea.setCaretColor(Color.WHITE);
     }
 
+    /**
+     * get current scroll area.
+     * @return scroll area.
+     */
     public JScrollPane getCurrent() {
         return scrollArea;
     }
 
+    /**
+     * set text 's color.
+     * @param color text 's color.
+     */
     public void setForeground(Color color) {
         textArea.setForeground(color);
     }
 
+    /**
+     * create text area.
+     * @param text text will be appeared in area.
+     * @param myColor text 's color.
+     * @return text area.
+     */
     public JScrollPane createTextArea(String text, Color myColor) {
         textArea = new JTextArea();
         textArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -103,6 +130,10 @@ public class TextArea {
         return scrollArea;
     }
 
+    /**
+     * main function to test text area.
+     * @param args arguments.
+     */
     public static void main(String[] args) {
         TextArea foo = new TextArea();
 

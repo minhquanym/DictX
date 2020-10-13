@@ -18,6 +18,9 @@ public class WordTextField {
     private boolean activate;
     private JTextField textField;
 
+    /**
+     * constructor no param for word text field.
+     */
     public WordTextField()  {
         posX = 0;
         posY = 0;
@@ -27,6 +30,13 @@ public class WordTextField {
         textField = new JTextField();
     }
 
+    /**
+     * set position for word text field.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width field 's width.
+     * @param height field 's height.
+     */
     public void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -34,14 +44,25 @@ public class WordTextField {
         this.height = height;
     }
 
+    /**
+     * getter for activate variable.
+     * @return activate.
+     */
     public boolean isActivate() {
         return activate;
     }
 
+    /**
+     * setter for activate variable.
+     * @param activate set value.
+     */
     public void setActivate(boolean activate) {
         this.activate = activate;
     }
 
+    /**
+     * customize text field.
+     */
     public void customizeTextField() {
         Font fileFont = new Font("Arial", Font.PLAIN, 20);
         textField.setFont(fileFont);
@@ -49,14 +70,25 @@ public class WordTextField {
         textField.setForeground(Color.gray.brighter());
     }
 
+    /**
+     * getter for current text field.
+     * @return current text field.
+     */
     JTextField getCurrent() {
         return textField;
     }
 
+    /**
+     * get text in field.
+     * @return text.
+     */
     String getText() {
         return textField.getText();
     }
 
+    /**
+     * add mouse listener to text field.
+     */
     void addMouseListener() {
         textField.addMouseListener(new MouseListener() {
             @Override
@@ -90,7 +122,14 @@ public class WordTextField {
         });
     }
 
-    void addKeyListener(SearchGUI app, WordTextField targetField, WordTextField explainField) {
+    /**
+     * add key listener to text field.
+     * @param app search gui.
+     * @param targetField word target.
+     * @param explainField word explain.
+     * @param dialog current dialog which contains text field.
+     */
+    void addKeyListener(SearchGUI app, WordTextField targetField, WordTextField explainField, JDialog dialog) {
         // add key listener
         textField.addKeyListener(new KeyListener() {
             @Override
@@ -133,6 +172,8 @@ public class WordTextField {
                         app.removeScrollPane();
                         app.addToPanel(app.createScrollPane(app.suggestWord("", -1)));
                         app.controlPanelRepaint();
+
+                        dialog.setVisible(false);
                     }
                 }
             }
@@ -144,14 +185,23 @@ public class WordTextField {
         });
     }
 
-    public JTextField createWordTextField(SearchGUI app, String nameTextField, WordTextField targetField, WordTextField explainField) {
+    /**
+     * create word text field.
+     * @param app search gui.
+     * @param nameTextField name of text field.
+     * @param targetField word target.
+     * @param explainField word explain.
+     * @param dialog dialog which contains text field.
+     * @return text field.
+     */
+    public JTextField createWordTextField(SearchGUI app, String nameTextField, WordTextField targetField, WordTextField explainField, JDialog dialog) {
         textField = new RoundJTextField(100);
         textField.setBounds(this.posX, this.posY, this.width, this.height);
         textField.setText(nameTextField);
 
         customizeTextField();
         addMouseListener();
-        addKeyListener(app, targetField, explainField);
+        addKeyListener(app, targetField, explainField, dialog);
 
         return textField;
     }

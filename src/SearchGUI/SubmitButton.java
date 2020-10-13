@@ -16,6 +16,13 @@ public class SubmitButton {
 
     private JButton submitButton;
 
+    /**
+     * set position for submit button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button 's width.
+     * @param height button 's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -23,13 +30,27 @@ public class SubmitButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit icon.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
-    void addMouseListener(SearchGUI app, WordTextField targetField, WordTextField explainFields) {
+    /**
+     * add mouse listener to submit button.
+     * @param app search gui.
+     * @param targetField target word.
+     * @param explainFields explain word.
+     * @param dialog current dialog which contain submit button.
+     */
+    void addMouseListener(SearchGUI app, WordTextField targetField, WordTextField explainFields, JDialog dialog) {
         submitButton.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -59,6 +80,8 @@ public class SubmitButton {
                     app.removeScrollPane();
                     app.addToPanel(app.createScrollPane(app.suggestWord("", -1)));
                     app.controlPanelRepaint();
+
+                    dialog.setVisible(false);
                 }
             }
 
@@ -84,12 +107,20 @@ public class SubmitButton {
         });
     }
 
-    JButton createSubmitButton(SearchGUI app, WordTextField targetField, WordTextField explainField) {
+    /**
+     * create submit button.
+     * @param app search gui.
+     * @param targetField word target.
+     * @param explainField word explain.
+     * @param dialog current dialog submit button is in.
+     * @return submit button.
+     */
+    JButton createSubmitButton(SearchGUI app, WordTextField targetField, WordTextField explainField, JDialog dialog) {
         ImageIcon submitIcon = new ImageIcon("resources/SubmitButton.png");
         submitButton = new JButton(resizeIcon(submitIcon, this.width, this.height));
         submitButton.setBounds(this.posX, this.posY, this.width, this.height);
 
-        addMouseListener(app, targetField, explainField);
+        addMouseListener(app, targetField, explainField, dialog);
 
         return submitButton;
     }

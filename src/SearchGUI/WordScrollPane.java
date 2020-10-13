@@ -16,10 +16,21 @@ public class WordScrollPane {
     private int visibleRowCount;
     private JScrollPane scrollPane;
 
+    /**
+     * constructor no param for word scroll pane.
+     */
     public WordScrollPane() {
         scrollPane = new JScrollPane();
     }
 
+    /**
+     * set position for scroll pane.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width scroll pane 's width.
+     * @param height scroll pane 's height.
+     * @param visibleRowCount visible row.
+     */
     public void setPosition(int posX, int posY, int width, int height, int visibleRowCount) {
         this.posX = posX;
         this.posY = posY;
@@ -28,6 +39,11 @@ public class WordScrollPane {
         this.visibleRowCount = visibleRowCount;
     }
 
+    /**
+     * add mouse listener to word scroll pane.
+     * @param app search gui.
+     * @param wordList suggest word list.
+     */
     void addMouseListener(SearchGUI app, JList<String> wordList) {
         wordList.addMouseListener(new MouseAdapter() {
             @Override
@@ -55,6 +71,9 @@ public class WordScrollPane {
         });
     }
 
+    /**
+     * add arrow key listener to word scroll pane.
+     */
     void addArrowKeyListener() {
         JScrollBar vertical = scrollPane.getVerticalScrollBar();
         InputMap im = vertical.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -62,6 +81,12 @@ public class WordScrollPane {
         im.put(KeyStroke.getKeyStroke("UP"), "negativeUnitIncrement");
     }
 
+    /**
+     * create scroll pane.
+     * @param app search gui.
+     * @param suggestWords list suggested word.
+     * @return scroll pane.
+     */
     public JScrollPane createScrollPane(SearchGUI app, ArrayList<Word> suggestWords) {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Word word : suggestWords) {
@@ -87,6 +112,10 @@ public class WordScrollPane {
         return scrollPane;
     }
 
+    /**
+     * getter for current scroll pane.
+     * @return current scroll pane.
+     */
     public JScrollPane getCurrent() {
         return scrollPane;
     }

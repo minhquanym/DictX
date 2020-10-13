@@ -16,20 +16,38 @@ public class TextArea {
     private JScrollPane scrollArea;
     private boolean activate;
 
+    /**
+     * constructor no param for text area.
+     */
     public TextArea() {
         textArea = new JTextArea();
         scrollArea = new JScrollPane();
         activate = false;
     }
 
+    /**
+     * setter activate.
+     * @return activate.
+     */
     public boolean isActivate() {
         return activate;
     }
 
+    /**
+     * setter activate.
+     * @param activate activate variable.
+     */
     public void setActivate(boolean activate) {
         this.activate = activate;
     }
 
+    /**
+     * set position for text area.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width area 's width.
+     * @param height area 's height.
+     */
     public void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -37,6 +55,9 @@ public class TextArea {
         this.height = height;
     }
 
+    /**
+     * disable editing of text area with some trick.
+     */
     public void DisableEditing() {
         // Dirty hack to disable editing
         textArea.addFocusListener(new FocusListener() {
@@ -80,22 +101,41 @@ public class TextArea {
         textArea.setCaretColor(Color.WHITE);
     }
 
+    /**
+     * get current scroll pane (scroll area).
+     * @return scroll area.
+     */
     public JScrollPane getCurrent() {
         return scrollArea;
     }
 
+    /**
+     * set color of text in area.
+     * @param color text 's color.
+     */
     public void setForeground(Color color) {
         textArea.setForeground(color);
     }
 
+    /**
+     * getter of text in area.
+     * @return text in TextArea.
+     */
     public String getText() {
         return textArea.getText();
     }
 
+    /**
+     * setter of text in area.
+     * @param text text will be added to TextArea.
+     */
     public void setText(String text) {
         textArea.setText(text);
     }
 
+    /**
+     * add mouse listener for text area.
+     */
     void addMouseListener() {
         textArea.addMouseListener(new MouseListener() {
             @Override
@@ -129,6 +169,9 @@ public class TextArea {
         });
     }
 
+    /**
+     * add key listener for text area.
+     */
     void addKeyListener() {
         textArea.addKeyListener(new KeyListener() {
             @Override
@@ -152,6 +195,12 @@ public class TextArea {
         });
     }
 
+    /**
+     * create text area.
+     * @param text text will be added to area.
+     * @param myColor color of text in area.
+     * @return scroll area.
+     */
     public JScrollPane createTextArea(String text, Color myColor) {
         textArea = new JTextArea();
         textArea.setFont(new Font("SansSerif", Font.PLAIN, 14));

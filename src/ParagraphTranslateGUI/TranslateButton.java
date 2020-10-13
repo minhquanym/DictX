@@ -13,6 +13,9 @@ public class TranslateButton {
 
     private JButton translateButton;
 
+    /**
+     * constructor for translate button.
+     */
     public TranslateButton() {
         this.posX = 0;
         this.posY = 0;
@@ -21,6 +24,13 @@ public class TranslateButton {
         translateButton = new JButton();
     }
 
+    /**
+     * set position of button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width frame 's width.
+     * @param height height 's width.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -28,12 +38,23 @@ public class TranslateButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit button.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener for translate button.
+     * @param app paragraph translate gui.
+     */
     public void addMouseListener(ParagraphTranslateGUI app) {
         translateButton.addMouseListener(new MouseListener() {
             @Override
@@ -65,6 +86,11 @@ public class TranslateButton {
         });
     }
 
+    /**
+     * create translate paragraph button with google api.
+     * @param app paragraph translate gui.
+     * @return translate paragraph button.
+     */
     JButton createTranslateButton(ParagraphTranslateGUI app) {
         ImageIcon translateIcon = new ImageIcon("resources/TranslateButton.png");
         translateButton = new JButton(resizeIcon(translateIcon, this.width, this.height));

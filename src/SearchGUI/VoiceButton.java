@@ -16,13 +16,11 @@ public class VoiceButton {
     private int height;
 
     private JButton enButton;
-    private JButton viButton;
 
     GooglePronounce googlePronounce;
 
     public VoiceButton() {
         enButton = new JButton();
-        viButton = new JButton();
         googlePronounce = new GooglePronounce();
     }
 
@@ -73,55 +71,13 @@ public class VoiceButton {
 
             }
         });
-
-        viButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                String text = app.getCurrentWordExplain();
-                try {
-                    googlePronounce.pronounce("vi", text);
-                } catch (IOException err) {
-                    err.printStackTrace();
-                } catch (JavaLayerException err) {
-                    err.printStackTrace();
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
     }
 
     JButton createVoiceButtonEn(SearchGUI app) {
         ImageIcon enIcon = new ImageIcon("resources/VoiceButtonEn.png");
         enButton = new JButton(resizeIcon(enIcon, this.width, this.height));
-        enButton.setBounds(this.posX - 31, this.posY, this.width, this.height);
+        enButton.setBounds(this.posX, this.posY, this.width, this.height);
         enButton.setToolTipText("english voice");
         return enButton;
-    }
-
-    JButton createVoiceButtonVi(SearchGUI app) {
-        ImageIcon viIcon = new ImageIcon("resources/VoiceButtonVi.png");
-        viButton = new JButton(resizeIcon(viIcon, this.width, this.height));
-        viButton.setBounds(this.posX, this.posY, this.width, this.height);
-        viButton.setToolTipText("vietnamese voice");
-        return viButton;
     }
 }

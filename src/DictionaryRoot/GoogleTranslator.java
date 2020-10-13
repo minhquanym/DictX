@@ -1,14 +1,19 @@
 package DictionaryRoot;
 
-import java.beans.Encoder;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.nio.Buffer;
 import org.json.*;
 
 public class GoogleTranslator {
+    /**
+     * translate single word.
+     * @param targetLang target string language.
+     * @param explainLang explain string language.
+     * @param text word which want to translate.
+     * @return translated word from google api.
+     * @throws Exception exception.
+     */
     public String translateSingleWord(String targetLang, String explainLang, String text)
             throws Exception {
         String api = "https://translate.google.com/translate_a/single?client=gtx&sl="
@@ -30,6 +35,12 @@ public class GoogleTranslator {
         con.disconnect();
         return parseResultSingle(content.toString());
     }
+
+    /**
+     * parse result single word.
+     * @param jsonString json string which is get.
+     * @return String to print.
+     */
     private String parseResultSingle(String jsonString) {
         String ans = "";
         JSONArray obj = new JSONArray(jsonString);
@@ -38,22 +49,30 @@ public class GoogleTranslator {
         JSONArray obj2 = new JSONArray(obj.get(0).toString());
         JSONArray meaning = new JSONArray(obj2.get(0).toString());
 
-        ans += (String)("\n" + meaning.get(1) + "   |   " + meaning.get(0) + "\n");
+        ans += (String) ("\n" + meaning.get(1) + "   |   " + meaning.get(0) + "\n");
         // different meaning
         JSONArray obj3 = new JSONArray(obj.get(1).toString());
         for (Object o : obj3) {
             JSONArray example = new JSONArray(o.toString());
-            ans += (String)("\n-  " + example.get(0) + ":  ");
+            ans += (String) ("\n-  " + example.get(0) + ":  ");
             JSONArray exampleWords = new JSONArray(example.get(1).toString());
             for (Object o2 : exampleWords) {
-                ans += (String)(o2.toString() + ", ");
+                ans += (String) (o2.toString() + ", ");
             }
             ans = ans.substring(0, ans.length() - 2);
-            ans += (String)("\n");
+            ans += (String) ("\n");
         }
         return ans;
     }
 
+    /**
+     * translate a paragraph use google translate api.
+     * @param targetLang target string language.
+     * @param explainLang explain string language.
+     * @param text paragraph.
+     * @return translated paragraph.
+     * @throws Exception exception.
+     */
     public String translateParagraph(String targetLang, String explainLang, String text)
             throws Exception {
         String api = "https://translate.googleapis.com/translate_a/single?client=gtx&sl="
@@ -73,6 +92,12 @@ public class GoogleTranslator {
         con.disconnect();
         return parseResultParagraph(content.toString());
     }
+
+    /**
+     * parse string from jsonString to string.
+     * @param jsonString json String which be get.
+     * @return string to print.
+     */
     private String parseResultParagraph(String jsonString) {
         JSONArray obj = new JSONArray(jsonString);
         JSONArray obj2 = new JSONArray(obj.get(0).toString());
@@ -80,8 +105,12 @@ public class GoogleTranslator {
         return (String) (obj_final.get(0));
     }
 
+    /**
+     * main function to test Google translator.
+     * @param args args.
+     * @throws Exception exception.
+     */
     public static void main(String[] args) throws Exception {
-
         // Can only call 100 requests per hour
         GoogleTranslator A = new GoogleTranslator();
         String result = A.translateSingleWord("en", "vi", "abaca");

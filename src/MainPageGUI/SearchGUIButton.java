@@ -13,6 +13,9 @@ public class SearchGUIButton {
 
     private JButton butt;
 
+    /**
+     * constructor for search gui button.
+     */
     public SearchGUIButton() {
         this.posX = 0;
         this.posY = 0;
@@ -21,6 +24,13 @@ public class SearchGUIButton {
         butt = new JButton();
     }
 
+    /**
+     * set position for button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button's width.
+     * @param height button 's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -28,12 +38,23 @@ public class SearchGUIButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit button.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener to button.
+     * @param app main page gui.
+     */
     void addMouseListener(MainPageGUI app) {
         butt.addMouseListener(new MouseListener() {
             @Override
@@ -63,6 +84,11 @@ public class SearchGUIButton {
         });
     }
 
+    /**
+     * create search button.
+     * @param app main page gui.
+     * @return search gui button.
+     */
     JButton createButton(MainPageGUI app) {
         ImageIcon translateIcon = new ImageIcon("resources/SearchGUIButton.png");
         butt = new JButton(resizeIcon(translateIcon, this.width, this.height));

@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class BackgroundImage extends JLabel {
+    /**
+     * load back ground image.
+     */
     public void load() {
         BufferedImage img = null;
         try {

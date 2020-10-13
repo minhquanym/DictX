@@ -1,7 +1,5 @@
 package MainPageGUI;
 
-import ParagraphTranslateGUI.ParagraphTranslateGUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -15,6 +13,9 @@ public class ParagraphTranslateButton {
 
     private JButton butt;
 
+    /**
+     * constructor for paragraph translate button.
+     */
     public ParagraphTranslateButton() {
         this.posX = 0;
         this.posY = 0;
@@ -23,6 +24,13 @@ public class ParagraphTranslateButton {
         butt = new JButton();
     }
 
+    /**
+     * set position in frame for button.
+     * @param posX x coordinate.
+     * @param posY y coordinate.
+     * @param width button's width.
+     * @param height button's height.
+     */
     void setPosition(int posX, int posY, int width, int height) {
         this.posX = posX;
         this.posY = posY;
@@ -30,12 +38,23 @@ public class ParagraphTranslateButton {
         this.height = height;
     }
 
+    /**
+     * fit icon to button.
+     * @param icon icon image.
+     * @param resizedWidth fit width.
+     * @param resizedHeight fit height.
+     * @return fit icon.
+     */
     private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
         Image img = icon.getImage();
         Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage);
     }
 
+    /**
+     * add mouse listener for button.
+     * @param app main page gui.
+     */
     void addMouseListener(MainPageGUI app) {
         butt.addMouseListener(new MouseListener() {
             @Override
@@ -65,6 +84,11 @@ public class ParagraphTranslateButton {
         });
     }
 
+    /**
+     * create translate button.
+     * @param app main page gui.
+     * @return button component.
+     */
     JButton createButton(MainPageGUI app) {
         ImageIcon translateIcon = new ImageIcon("resources/ParagraphTranslateGUIButton.png");
         butt = new JButton(resizeIcon(translateIcon, this.width, this.height));

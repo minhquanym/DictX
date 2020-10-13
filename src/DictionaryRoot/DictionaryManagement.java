@@ -1,20 +1,20 @@
 package DictionaryRoot;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.util.*;
 
 public class DictionaryManagement {
     private Dictionary myDictionary;
 
     /**
-     * Call dictionary constructor
+     * Call dictionary constructor.
      */
     public DictionaryManagement() {
         myDictionary = new Dictionary();
     }
+
     /**
-     * Insert words by typing in command line
+     * Insert words by typing in command line.
      */
     public void insertFromCommandline() throws IOException {
         BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
@@ -42,8 +42,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Create dictionary from file dictionaries.txt
-     * @throws IOException
+     * Create dictionary from file dictionaries.txt.
+     * @throws IOException no file match.
      */
     public void insertFromFile() throws IOException {
         try {
@@ -64,7 +64,7 @@ public class DictionaryManagement {
 
 
     /**
-     * Show all words of the dictionary
+     * Show all words of the dictionary.
      */
     public void showWords() {
         System.out.printf("%-10s |%-15s |%-15s \n", "No", "English", "Tiếng Việt");
@@ -75,8 +75,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Search word from command line
-     * @throws IOException
+     * Search word from command line.
+     * @throws IOException no file match.
      */
     public void dictionaryLookup() throws IOException {
         System.out.print("Enter the word you want to lookup: ");
@@ -92,8 +92,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Add new word from command line
-     * @throws IOException
+     * Add new word from command line.
+     * @throws IOException no file match.
      */
     public void addWord() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -111,8 +111,8 @@ public class DictionaryManagement {
         }
     }
     /**
-     * Delete word from command line
-     * @throws IOException
+     * Delete word from command line.
+     * @throws IOException no file match.
      */
     public void deleteWord() throws IOException {
         System.out.print("Enter the word (English) you want to delete: ");
@@ -128,8 +128,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Edit word from command line
-     * @throws IOException
+     * Edit word from command line.
+     * @throws IOException no file match.
      */
     public void editWord() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -149,8 +149,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Suggest word with prefix from command line
-     * @throws IOException
+     * Suggest word with prefix from command line.
+     * @throws IOException no file match.
      */
     public void suggestWord() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -167,6 +167,10 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * export dictionary to "new_dictionaries.txt".
+     * @throws IOException no file match.
+     */
     public void dictionaryExportToFile() throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("new_dictionaries.txt"));
         ArrayList<Word> allWords = myDictionary.getAllWords();
@@ -182,6 +186,12 @@ public class DictionaryManagement {
         }
         bw.close();
     }
+
+    /**
+     * main function to test dictionary management.
+     * @param args args.
+     * @throws IOException no file match.
+     */
     public static void main(String[] args) throws IOException {
         DictionaryManagement dict1 = new DictionaryManagement();
         dict1.insertFromFile();

@@ -5,6 +5,10 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 
 public class CustomizeScrollBar {
+    /**
+     * customize scroll pane.
+     * @param scrollPane scroll pane which want to be customized.
+     */
     public static void custom(JScrollPane scrollPane) {
         scrollPane.setComponentZOrder(scrollPane.getVerticalScrollBar(), 0);
         scrollPane.setComponentZOrder(scrollPane.getViewport(), 1);
@@ -46,6 +50,11 @@ public class CustomizeScrollBar {
 class MyScrollBarUI extends BasicScrollBarUI {
     private final Dimension d = new Dimension();
 
+    /**
+     * create decrease button.
+     * @param orientation direction.
+     * @return decreased button.
+     */
     @Override
     protected JButton createDecreaseButton(int orientation) {
         return new JButton() {
@@ -56,6 +65,11 @@ class MyScrollBarUI extends BasicScrollBarUI {
         };
     }
 
+    /**
+     * create increase button.
+     * @param orientation direction.
+     * @return increased button.
+     */
     @Override
     protected JButton createIncreaseButton(int orientation) {
         return new JButton() {
@@ -66,10 +80,22 @@ class MyScrollBarUI extends BasicScrollBarUI {
         };
     }
 
+    /**
+     * auto generated.
+     * @param g graphic.
+     * @param c component.
+     * @param r rectangle.
+     */
     @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
     }
 
+    /**
+     * paint thumb.
+     * @param g graphic.
+     * @param c component.
+     * @param r rectangle.
+     */
     @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -93,6 +119,13 @@ class MyScrollBarUI extends BasicScrollBarUI {
         g2.dispose();
     }
 
+    /**
+     * setter for thumb bounds.
+     * @param x coordinate x.
+     * @param y coordinate y.
+     * @param width thumb bounds 's width.
+     * @param height thumb bounds 's height.
+     */
     @Override
     protected void setThumbBounds(int x, int y, int width, int height) {
         super.setThumbBounds(x, y, width, height);

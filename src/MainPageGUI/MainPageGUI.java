@@ -17,6 +17,10 @@ public class MainPageGUI {
     private SearchGUI searchGUI;
     private ParagraphTranslateGUI paragraphTranslateGUI;
 
+    /**
+     * constructor for main page.
+     * @param app dictionary application.
+     */
     public MainPageGUI(DictionaryApplication app) {
         frameWidth = app.getFrameWidth();
         frameHeight = app.getFrameHeight();
@@ -28,6 +32,13 @@ public class MainPageGUI {
         paragraphTranslateGUI = new ParagraphTranslateGUI(app);
     }
 
+    /**
+     * constructor for main page.
+     * @param frameWidth frame's width.
+     * @param frameHeight frame's height.
+     * @param mainFrame main frame.
+     * @param controlPanel control panel.
+     */
     public MainPageGUI(int frameWidth, int frameHeight, JFrame mainFrame, JPanel controlPanel) {
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
@@ -38,6 +49,9 @@ public class MainPageGUI {
         paragraphTranslateGUI = new ParagraphTranslateGUI(frameWidth, frameHeight, mainFrame, controlPanel);
     }
 
+    /**
+     * execute search gui.
+     */
     public void executeSearchGUI() {
         controlPanel.removeAll();
         searchGUI.execute();
@@ -45,6 +59,9 @@ public class MainPageGUI {
         controlPanel.revalidate();
     }
 
+    /**
+     * execute paragraph gui.
+     */
     public void executeParagraphTranslateGUI() {
         controlPanel.removeAll();
         paragraphTranslateGUI.execute();
@@ -52,6 +69,9 @@ public class MainPageGUI {
         controlPanel.revalidate();
     }
 
+    /**
+     * execute main page gui.
+     */
     public void execute() {
         // background png
         BackgroundImage background = new BackgroundImage();
